@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/MainScene.gd" type="Script" id=1]
 [ext_resource path="res://assets/desert1.png" type="Texture" id=2]
 [ext_resource path="res://scenes/Rocket.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/sound/Ludum Dare 38 - Track 1.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/rocket1_inside.png" type="Texture" id=4]
+[ext_resource path="res://assets/sound/Ludum Dare 38 - Track 1.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 295.56, 201.094 )
@@ -27,8 +28,13 @@ scale = Vector2( 0.416667, 0.416667 )
 position = Vector2( 898.499, 152.685 )
 shape = SubResource( 1 )
 
+[node name="rocket1_inside" type="Sprite" parent="."]
+position = Vector2( 1149.31, 518.045 )
+scale = Vector2( 1.30041, 1.30732 )
+texture = ExtResource( 4 )
+
 [node name="Things" type="Node2D" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )
+stream = ExtResource( 5 )
 autoplay = true
