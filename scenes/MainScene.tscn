@@ -1,13 +1,324 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/MainScene.gd" type="Script" id=1]
-[ext_resource path="res://assets/desert1.png" type="Texture" id=2]
-[ext_resource path="res://scenes/Rocket.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/rocket1_inside.png" type="Texture" id=4]
-[ext_resource path="res://assets/sound/Ludum Dare 38 - Track 1.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/Background.png" type="Texture" id=2]
+[ext_resource path="res://assets/billboard1.png" type="Texture" id=3]
+[ext_resource path="res://scenes/Rocket.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/rocket1_inside.png" type="Texture" id=5]
+[ext_resource path="res://assets/smoke1.png" type="Texture" id=6]
+[ext_resource path="res://assets/fire1.png" type="Texture" id=7]
+[ext_resource path="res://assets/sound/Ludum Dare 38 - Track 1.wav" type="AudioStream" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 295.56, 201.094 )
+
+[sub_resource type="Curve" id=3]
+max_value = 3.0
+_data = [ Vector2( 0.0107385, 0.472 ), 0.0, 5.56909, 0, 0, Vector2( 0.989262, 2.7408 ), -0.0359727, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+emission_shape = 2
+emission_box_extents = Vector3( 1, 80, 1 )
+flag_disable_z = true
+spread = 20.17
+flatness = 0.01
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 290.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -16.9
+damping = 5.63
+damping_random = 0.06
+angle_random = 0.54
+scale = 1.41
+scale_curve = SubResource( 4 )
+
+[sub_resource type="Curve" id=7]
+max_value = 2.0
+_data = [ Vector2( 0, 1.0176 ), 0.0, -0.606486, 0, 0, Vector2( 1, 0 ), -4.9376, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=9]
+emission_shape = 2
+emission_box_extents = Vector3( 15, 35, 1 )
+flag_disable_z = true
+spread = 19.18
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 300.0
+angular_velocity = -224.26
+angular_velocity_random = 0.17
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.8
+scale_random = 0.43
+scale_curve = SubResource( 8 )
+hue_variation = 0.1
+hue_variation_random = 0.58
+
+[sub_resource type="Animation" id=2]
+resource_name = "RocketLanding"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.5, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1325.78, -220 ), Vector2( 1325.78, 800 ), Vector2( 1325.78, 1080 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SmokeLeft:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SmokeLeft:show_behind_parent")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SmokeLeft:process_material:initial_velocity")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 3.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 290.0, 100.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SmokeLeft:process_material:tangential_accel")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 3.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 50.71 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SmokeRight:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SmokeRight:show_behind_parent")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("SmokeRight:process_material:initial_velocity")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 3.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 290.0, 100.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("SmokeRight:process_material:tangential_accel")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 3.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 50.71 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("rocket1_inside:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("FireLeft:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("FireRight:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("SmokeLeft:visible")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("SmokeRight:visible")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "RocketLaunch"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2, 3, 4, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1325.78, 1080 ), Vector2( 1325.78, 980 ), Vector2( 1325.78, 780 ), Vector2( 1325.78, 380 ), Vector2( 1325.78, -420 ), Vector2( 1325.78, -1220 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FireLeft:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FireRight:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("FireLeft:process_material:spread")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 90.0, 19.18 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("FireRight:process_material:spread")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 90.0, 19.18 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SmokeLeft:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SmokeRight:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [node name="MainScene" type="Area2D"]
 script = ExtResource( 1 )
@@ -16,25 +327,93 @@ script = ExtResource( 1 )
 position = Vector2( 951.37, 535.146 )
 texture = ExtResource( 2 )
 
-[node name="Rocket" parent="." instance=ExtResource( 3 )]
-editor/display_folded = true
-position = Vector2( 1190.42, 1068.96 )
+[node name="Billboard" type="Sprite" parent="."]
+position = Vector2( 526.962, 646.497 )
+scale = Vector2( 1.56919, 1.50092 )
+texture = ExtResource( 3 )
+
+[node name="Rocket" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1325.78, -1220 )
+
+[node name="rocket1_inside" type="Sprite" parent="Rocket"]
+visible = false
+position = Vector2( -17.1292, -229.548 )
+scale = Vector2( 0.541838, 0.544717 )
+texture = ExtResource( 5 )
 
 [node name="Inside" type="Area2D" parent="Rocket"]
 position = Vector2( -369.167, -296.354 )
 scale = Vector2( 0.416667, 0.416667 )
 
 [node name="InsideShape" type="CollisionShape2D" parent="Rocket/Inside"]
+visible = false
 position = Vector2( 898.499, 152.685 )
 shape = SubResource( 1 )
 
-[node name="rocket1_inside" type="Sprite" parent="."]
-position = Vector2( 1149.31, 518.045 )
-scale = Vector2( 1.30041, 1.30732 )
-texture = ExtResource( 4 )
+[node name="SmokeLeft" type="Particles2D" parent="Rocket"]
+visible = false
+show_behind_parent = true
+position = Vector2( -66.9451, -29.0972 )
+rotation = 1.5708
+scale = Vector2( 0.4, 0.22 )
+amount = 12
+lifetime = 4.0
+speed_scale = 4.0
+process_material = SubResource( 5 )
+texture = ExtResource( 6 )
+
+[node name="SmokeRight" type="Particles2D" parent="Rocket"]
+visible = false
+show_behind_parent = true
+position = Vector2( 62.6945, -25.4624 )
+rotation = 1.5708
+scale = Vector2( 0.4, 0.22 )
+amount = 11
+lifetime = 4.0
+speed_scale = 4.0
+process_material = SubResource( 5 )
+texture = ExtResource( 6 )
+
+[node name="FireLeft" type="Particles2D" parent="Rocket"]
+visible = false
+self_modulate = Color( 1, 1, 1, 0.509804 )
+show_behind_parent = true
+position = Vector2( -61.5258, 14.9795 )
+rotation = 1.5708
+scale = Vector2( 0.3, 0.3 )
+amount = 16
+lifetime = 1.8
+preprocess = 15.58
+speed_scale = 10.0
+explosiveness = 0.21
+randomness = 0.21
+process_material = SubResource( 9 )
+texture = ExtResource( 7 )
+
+[node name="FireRight" type="Particles2D" parent="Rocket"]
+visible = false
+self_modulate = Color( 1, 1, 1, 0.509804 )
+show_behind_parent = true
+position = Vector2( 65.1263, 16.7144 )
+rotation = 1.5708
+scale = Vector2( 0.3, 0.3 )
+amount = 15
+lifetime = 1.8
+preprocess = 15.58
+speed_scale = 10.0
+explosiveness = 0.21
+randomness = 0.26
+process_material = SubResource( 9 )
+texture = ExtResource( 7 )
 
 [node name="Things" type="Node2D" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
+stream = ExtResource( 8 )
 autoplay = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Rocket")
+anims/RocketLanding = SubResource( 2 )
+anims/RocketLaunch = SubResource( 6 )
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
