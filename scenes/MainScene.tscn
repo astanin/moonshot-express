@@ -32,12 +32,11 @@ flag_disable_z = true
 spread = 20.17
 flatness = 0.01
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 100.0
+initial_velocity = 290.0
 angular_velocity = 14.731
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = -16.9
-tangential_accel = 50.71
 damping = 5.63
 damping_random = 0.06
 angle_random = 0.54
@@ -419,9 +418,10 @@ scale = Vector2( 0.145, -0.145 )
 texture = ExtResource( 5 )
 
 [node name="Rocket" parent="." instance=ExtResource( 9 )]
-position = Vector2( 1325.78, 1080 )
+position = Vector2( 1325.78, -220 )
 
 [node name="rocket1_inside" type="Sprite" parent="Rocket"]
+visible = false
 position = Vector2( -17.1292, -229.548 )
 scale = Vector2( 0.541838, 0.544717 )
 texture = ExtResource( 10 )
@@ -436,10 +436,10 @@ position = Vector2( 898.499, 152.685 )
 shape = SubResource( 1 )
 
 [node name="SmokeLeft" type="Particles2D" parent="Rocket"]
+show_behind_parent = true
 position = Vector2( -66.9451, -29.0972 )
 rotation = 1.5708
 scale = Vector2( 0.4, 0.22 )
-emitting = false
 amount = 12
 lifetime = 4.0
 speed_scale = 4.0
@@ -447,10 +447,10 @@ process_material = SubResource( 4 )
 texture = ExtResource( 11 )
 
 [node name="SmokeRight" type="Particles2D" parent="Rocket"]
+show_behind_parent = true
 position = Vector2( 62.6945, -25.4624 )
 rotation = 1.5708
 scale = Vector2( 0.4, 0.22 )
-emitting = false
 amount = 11
 lifetime = 4.0
 speed_scale = 4.0
@@ -490,6 +490,9 @@ process_material = SubResource( 7 )
 texture = ExtResource( 12 )
 
 [node name="Things" type="Node2D" parent="."]
+position = Vector2( 0.000122115, 1.48968e-005 )
+rotation = -4.65661e-010
+scale = Vector2( 1, 1 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 13 )
@@ -501,8 +504,8 @@ anims/RocketLanding = SubResource( 8 )
 anims/RocketLaunch = SubResource( 9 )
 
 [node name="ladder" type="Sprite" parent="."]
-position = Vector2( 1051.83, 882.435 )
-rotation = 0.286974
+position = Vector2( 905.033, 1322.82 )
+rotation = -0.00237134
 scale = Vector2( 0.346559, 0.327987 )
 texture = ExtResource( 14 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

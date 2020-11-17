@@ -2,8 +2,6 @@
 
 [ext_resource path="res://assets/mainscene/rocket1.png" type="Texture" id=1]
 
-
-
 [node name="Rocket" type="KinematicBody2D"]
 scale = Vector2( 2.4, 2.4 )
 

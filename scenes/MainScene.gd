@@ -8,6 +8,7 @@ onready var AnimationPlayer = get_node("AnimationPlayer")
 onready var LastThing = null
 var RocketStatus = "InSpace" # "InSpace", "", or "Landed"
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#spawn_thing()
@@ -24,7 +25,9 @@ func _process(delta):
 		elif RocketStatus == "InSpace":
 			AnimationPlayer.play("RocketLanding")
 			RocketStatus = ""
-	spawn_thing()
+
+	if RocketStatus == "Landed":
+		spawn_thing()
 
 
 func spawn_thing():
@@ -36,10 +39,12 @@ func spawn_thing():
 		pt.rocket = Rocket
 		pt.active = true
 		LastThing = pt
+
 	
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "RocketLanding":
 		RocketStatus = "Landed"
+		spawn_thing()
 	elif anim_name == "RocketLaunch":
 		RocketStatus = "InSpace"
