@@ -15,6 +15,7 @@
 [ext_resource path="res://assets/sound/Ludum Dare 38 - Track 1.wav" type="AudioStream" id=13]
 [ext_resource path="res://assets/mainscene/ladder.png" type="Texture" id=14]
 
+
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 295.56, 201.094 )
 
@@ -32,12 +33,11 @@ flag_disable_z = true
 spread = 20.17
 flatness = 0.01
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 100.0
+initial_velocity = 290.0
 angular_velocity = 14.731
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = -16.9
-tangential_accel = 50.71
 damping = 5.63
 damping_random = 0.06
 angle_random = 0.54
@@ -245,7 +245,7 @@ tracks/14/loop_wrap = true
 tracks/14/imported = false
 tracks/14/enabled = true
 tracks/14/keys = {
-"times": PoolRealArray( 0, 4.4, 5 ),
+"times": PoolRealArray( 0, 4, 5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 905.033, 1322.82 ), Vector2( 905.033, 1322.82 ), Vector2( 1051.83, 882.435 ) ]
@@ -257,7 +257,7 @@ tracks/15/loop_wrap = true
 tracks/15/imported = false
 tracks/15/enabled = true
 tracks/15/keys = {
-"times": PoolRealArray( 0, 4.4, 5 ),
+"times": PoolRealArray( 0, 4, 5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ -0.135868, -0.135868, 16.4424 ]
@@ -349,30 +349,6 @@ tracks/6/keys = {
 "update": 1,
 "values": [ false ]
 }
-tracks/7/type = "value"
-tracks/7/path = NodePath("../ladder:position")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1051.83, 882.435 ), Vector2( 610.068, 1161.29 ) ]
-}
-tracks/8/type = "value"
-tracks/8/path = NodePath("../ladder:rotation_degrees")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 16.4424, -88.9964 ]
-}
 
 [node name="MainScene" type="Area2D"]
 rotation = 0.00296486
@@ -419,9 +395,10 @@ scale = Vector2( 0.145, -0.145 )
 texture = ExtResource( 5 )
 
 [node name="Rocket" parent="." instance=ExtResource( 9 )]
-position = Vector2( 1325.78, 1080 )
+position = Vector2( 1325.78, -220 )
 
 [node name="rocket1_inside" type="Sprite" parent="Rocket"]
+visible = false
 position = Vector2( -17.1292, -229.548 )
 scale = Vector2( 0.541838, 0.544717 )
 texture = ExtResource( 10 )
@@ -436,10 +413,10 @@ position = Vector2( 898.499, 152.685 )
 shape = SubResource( 1 )
 
 [node name="SmokeLeft" type="Particles2D" parent="Rocket"]
+show_behind_parent = true
 position = Vector2( -66.9451, -29.0972 )
 rotation = 1.5708
 scale = Vector2( 0.4, 0.22 )
-emitting = false
 amount = 12
 lifetime = 4.0
 speed_scale = 4.0
@@ -447,10 +424,10 @@ process_material = SubResource( 4 )
 texture = ExtResource( 11 )
 
 [node name="SmokeRight" type="Particles2D" parent="Rocket"]
+show_behind_parent = true
 position = Vector2( 62.6945, -25.4624 )
 rotation = 1.5708
 scale = Vector2( 0.4, 0.22 )
-emitting = false
 amount = 11
 lifetime = 4.0
 speed_scale = 4.0
@@ -501,8 +478,8 @@ anims/RocketLanding = SubResource( 8 )
 anims/RocketLaunch = SubResource( 9 )
 
 [node name="ladder" type="Sprite" parent="."]
-position = Vector2( 1051.83, 882.435 )
-rotation = 0.286974
+position = Vector2( 905.033, 1322.82 )
+rotation = -0.00383288
 scale = Vector2( 0.346559, 0.327987 )
 texture = ExtResource( 14 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/unicorn_thing.png-fe05dfb471b8d98eca3c8d094a78d40f.stex"
+path="res://.import/ladder.png-a61e83c0ae2fa2991d2b1380cdb3a3f7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/unicorn_thing.png"
-dest_files=[ "res://.import/unicorn_thing.png-fe05dfb471b8d98eca3c8d094a78d40f.stex" ]
+source_file="res://assets/mainscene/ladder.png"
+dest_files=[ "res://.import/ladder.png-a61e83c0ae2fa2991d2b1380cdb3a3f7.stex" ]
 
 [params]
 

@@ -1,7 +1,7 @@
 extends Node2D
 
 
-onready var PinkThing = preload('res://scenes/PinkThing.tscn')
+onready var Thing = preload('res://scenes/Thing.tscn')
 onready var Things = get_node("Things")
 onready var Rocket = get_node("Rocket")
 onready var AnimationPlayer = get_node("AnimationPlayer")
@@ -26,9 +26,10 @@ func _process(delta):
 			RocketStatus = ""
 	spawn_thing()
 
+
 func spawn_thing():
 	if LastThing == null or not LastThing.active:
-		var pt = PinkThing.instance()
+		var pt = Thing.instance()
 		Things.add_child(pt)
 		pt.set_position(Vector2(300, 200))
 		pt.set_rotation_degrees(randf()*360)

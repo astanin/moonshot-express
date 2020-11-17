@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Background.png-6d72d35f07f42b3845e8764c552bb4fb.stex"
+path="res://.import/corgi.png-9042f7bb9a7a2ce0a3ef61792e240892.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Background.png"
-dest_files=[ "res://.import/Background.png-6d72d35f07f42b3845e8764c552bb4fb.stex" ]
+source_file="res://assets/items/corgi.png"
+dest_files=[ "res://.import/corgi.png-9042f7bb9a7a2ce0a3ef61792e240892.stex" ]
 
 [params]
 
