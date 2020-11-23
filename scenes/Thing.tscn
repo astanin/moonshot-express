@@ -1,17 +1,27 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/Thing.gd" type="Script" id=1]
-[ext_resource path="res://assets/sound/place.wav" type="AudioStream" id=2]
-[ext_resource path="res://assets/items/unicorn.png" type="Texture" id=3]
-[ext_resource path="res://assets/items/corgi.png" type="Texture" id=4]
-[ext_resource path="res://assets/items/bentley.png" type="Texture" id=5]
-[ext_resource path="res://assets/items/hippo.png" type="Texture" id=6]
+[ext_resource path="res://assets/light.png" type="Texture" id=2]
+[ext_resource path="res://assets/sound/place.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/items/unicorn.png" type="Texture" id=4]
+[ext_resource path="res://assets/items/corgi.png" type="Texture" id=5]
+[ext_resource path="res://assets/items/bentley.png" type="Texture" id=6]
+[ext_resource path="res://assets/items/hippo.png" type="Texture" id=7]
 
 [node name="Thing" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
+[node name="Light" type="Light2D" parent="."]
+visible = false
+position = Vector2( -0.338927, -2.22363 )
+scale = Vector2( 0.455345, 0.455345 )
+texture = ExtResource( 2 )
+texture_scale = 5.39
+color = Color( 0.94902, 0.894118, 0.0823529, 1 )
+energy = 0.85
+
 [node name="PlaceSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 2 )
+stream = ExtResource( 3 )
 
 [node name="UnicornItem" type="CollisionPolygon2D" parent="."]
 visible = false
@@ -22,7 +32,7 @@ polygon = PoolVector2Array( 0.972406, -2.09719, 28.9818, -5.66702, 45.1833, -15.
 [node name="Sprite" type="Sprite" parent="UnicornItem"]
 position = Vector2( 9.77464, -37.03 )
 scale = Vector2( 0.165552, 0.165552 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 
 [node name="CorgiItem" type="CollisionPolygon2D" parent="."]
 visible = false
@@ -32,7 +42,7 @@ polygon = PoolVector2Array( 5.69168, 30.1833, 13.5149, 22.4892, 35.0505, 19.4184
 [node name="Sprite" type="Sprite" parent="CorgiItem"]
 position = Vector2( -0.280516, -39.4765 )
 scale = Vector2( 0.300021, 0.300021 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 
 [node name="BentleyItem" type="CollisionPolygon2D" parent="."]
 visible = false
@@ -41,14 +51,13 @@ polygon = PoolVector2Array( -94.6312, 44.1197, -16.3411, 62.2243, -3.61893, 72.4
 [node name="bentley" type="Sprite" parent="BentleyItem"]
 position = Vector2( 14.0586, -3.43404 )
 scale = Vector2( 0.585983, 0.585983 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="HippoItem" type="CollisionPolygon2D" parent="."]
-visible = false
 position = Vector2( -0.905533, -2.7166 )
 polygon = PoolVector2Array( -63.6698, 68.0604, -117.096, 65.3438, -137.018, 47.2332, -145.168, 11.0119, -131.585, -27.926, -100.797, -51.4698, -125.246, -102.18, -116.191, -104.896, -89.9303, -64.1472, -65.4809, -69.5804, -70.9141, -94.9353, -41.0315, -102.18, -33.7873, -81.3523, -14.7711, -82.2579, -6.62132, -103.991, 9.67827, -115.763, 26.8833, -116.668, 51.3327, -110.329, 67.6323, -95.8409, 67.6323, -71.3915, 93.8927, -46.9421, 111.098, -21.5872, 116.531, 11.0119, 111.098, 39.0834, 106.57, 53.5719, 30.5055, 61.7217 )
 
 [node name="hippo" type="Sprite" parent="HippoItem"]
 position = Vector2( -15.2759, -23.2428 )
 scale = Vector2( 0.455345, 0.455345 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
