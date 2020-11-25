@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Atomic_Bomb-Sound_Explorer-897730679.wav-f0e923f00338904690605b29ac380a1d.sample"
+
+[deps]
+
+source_file="res://assets/sound/Atomic_Bomb-Sound_Explorer-897730679.wav"
+dest_files=[ "res://.import/Atomic_Bomb-Sound_Explorer-897730679.wav-f0e923f00338904690605b29ac380a1d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
