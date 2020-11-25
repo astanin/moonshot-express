@@ -7,6 +7,9 @@ onready var MainScene = get_parent()
 onready var Rocket = MainScene.get_node("Rocket")
 
 
+onready var Blip = get_node("SoundFX/Blip")
+
+
 export var NumberOfSlots = 19
 var Slots = []
 var SelectedIndex = 0
@@ -55,11 +58,13 @@ func _process(delta):
 			NextAngle = PrevAngle - AngularStep
 			RotationTime = 0
 			SelectedIndex = fmod(SelectedIndex + 1, NumberOfSlots)
+			Blip.play()
 		elif Input.is_action_pressed("wheel_prev"):
 			PrevAngle = Items.get_rotation()
 			NextAngle = PrevAngle + AngularStep
 			RotationTime = 0
 			SelectedIndex = fmod(SelectedIndex - 1, NumberOfSlots)
+			Blip.play()
 		elif Input.is_action_just_pressed("wheel_select"):
 			var SelectedItem = Slots[SelectedIndex]
 			if SelectedItem:
@@ -73,6 +78,7 @@ func _process(delta):
 				SelectedItem.set_global_rotation(grot)
 				emit_signal("item_selected", SelectedItem)
 				active = false
+				Blip.play()
 
 
 func spawn_thing(index = -1):

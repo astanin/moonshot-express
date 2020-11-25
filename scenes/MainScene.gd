@@ -17,6 +17,8 @@ var WheelVisible = false
 func _ready():
 	var tip_start = get_node("tip_start")
 	tip_start.set_visible(true)
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	get_node("tip_move_and_place").hide()
 
 
 func cleanup_container(container):
@@ -26,18 +28,29 @@ func cleanup_container(container):
 		last.queue_free()
 
 
+func launch_rocket():
+	if WheelVisible:
+		WheelAnimation.play("HideWheel")
+	RocketAnimation.play("RocketLaunch")
+	RocketStatus = "IsLaunching"
+	var fx = get_node("SoundFX/RocketLaunch")
+	fx.play()
+	cleanup_container(Things) # TODO add a nice animation
+	get_node("tip_move_and_place").hide()
+
+
+func land_rocket():
+	RocketAnimation.play("RocketLanding")
+	RocketStatus = "IsLanding"
+
+
 func _process(delta):
 	if Input.is_action_pressed("start"):
 		print("rocket:",RocketStatus,", wheel:",WheelVisible)
 		if RocketStatus == "Landed":
-			if WheelVisible:
-				WheelAnimation.play("HideWheel")
-			RocketAnimation.play("RocketLaunch")
-			RocketStatus = "IsLaunching"
-			cleanup_container(Things) # TODO add a nice animation
+			launch_rocket()
 		elif RocketStatus == "InSpace":
-			RocketAnimation.play("RocketLanding")
-			RocketStatus = "IsLanding"
+			land_rocket()
 
 
 func _on_Wheel_item_selected(item):
@@ -45,6 +58,7 @@ func _on_Wheel_item_selected(item):
 	Wheel.active = false
 	if WheelVisible:
 		WheelAnimation.play("HideWheel", -1, 3.0)
+		get_node("tip_move_and_place").show()
 	item.active = true
 
 
@@ -64,6 +78,7 @@ func _on_Thing_item_placed(item):
 	if !WheelVisible:
 		WheelAnimation.play("ShowWheel", -1, 3.0)
 	Wheel.active = true
+	get_node("tip_move_and_place").hide()
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):

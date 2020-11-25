@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/Wheel.gd" type="Script" id=1]
 [ext_resource path="res://assets/items/wheel.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/tip_selection.png" type="Texture" id=4]
 [ext_resource path="res://assets/tip_select_prev_next.png" type="Texture" id=5]
 [ext_resource path="res://assets/tip_select_mini.png" type="Texture" id=6]
+[ext_resource path="res://assets/sound/Robot_blip-Marianne_Gagnon-120342607.wav" type="AudioStream" id=7]
 
 [node name="Wheel" type="Node2D"]
 script = ExtResource( 1 )
@@ -46,3 +47,9 @@ texture = ExtResource( 5 )
 modulate = Color( 1, 1, 1, 0.752941 )
 position = Vector2( 1050.34, -467.922 )
 texture = ExtResource( 6 )
+
+[node name="SoundFX" type="Node" parent="."]
+
+[node name="Blip" type="AudioStreamPlayer" parent="SoundFX"]
+stream = ExtResource( 7 )
+volume_db = -10.0
