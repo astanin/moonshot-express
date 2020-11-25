@@ -3,28 +3,43 @@ extends Node2D
 
 onready var Thing = preload('res://scenes/Thing.tscn')
 onready var Items = get_node("AvailableItems")
-onready var Rocket = get_parent()
+onready var MainScene = get_parent()
+onready var Rocket = MainScene.get_node("Rocket")
 
 
 export var NumberOfSlots = 19
 var Slots = []
+var SelectedIndex = 0
 var ItemRadius = 720
 var AngularStep = PI * 2 / NumberOfSlots
-var StepTime = 1.0
+var StepTime = 0.25
 var active = true
 var PrevAngle = 0
 var NextAngle = 0
 var RotationTime = -1
 
+
+signal item_selected(item)
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for i in range(NumberOfSlots):
+	for _i in range(NumberOfSlots):
 		spawn_thing()
+	SelectedIndex = NumberOfSlots - 4
+	connect("item_selected", MainScene, "_on_Wheel_item_selected")
 
 
 func is_rotating():
 	return RotationTime >= 0 and RotationTime < StepTime
 
+
+func refill():
+	for i in range(NumberOfSlots):
+		var SlotItem = Slots[i]
+		if SlotItem == null:
+			spawn_thing(i)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -35,18 +50,37 @@ func _process(delta):
 		Items.set_rotation(t*NextAngle + (1-t)*PrevAngle)
 	
 	if active and not rotating:
-		if Input.is_action_just_pressed("wheel_next"):
+		if Input.is_action_pressed("wheel_next"):
 			PrevAngle = Items.get_rotation()
 			NextAngle = PrevAngle - AngularStep
 			RotationTime = 0
-		elif Input.is_action_just_pressed("wheel_prev"):
+			SelectedIndex = fmod(SelectedIndex + 1, NumberOfSlots)
+		elif Input.is_action_pressed("wheel_prev"):
 			PrevAngle = Items.get_rotation()
 			NextAngle = PrevAngle + AngularStep
 			RotationTime = 0
+			SelectedIndex = fmod(SelectedIndex - 1, NumberOfSlots)
+		elif Input.is_action_just_pressed("wheel_select"):
+			var SelectedItem = Slots[SelectedIndex]
+			if SelectedItem:
+				Slots[SelectedIndex] = null
+				var SceneThings = MainScene.get_node("Things")
+				var gpos = SelectedItem.get_global_position()
+				var grot = SelectedItem.get_global_rotation()
+				SelectedItem.get_parent().remove_child(SelectedItem)
+				SceneThings.add_child(SelectedItem)
+				SelectedItem.set_global_position(gpos)
+				SelectedItem.set_global_rotation(grot)
+				emit_signal("item_selected", SelectedItem)
+				active = false
 
 
-func spawn_thing():
-	var idx = Slots.size()
+func spawn_thing(index = -1):
+	var idx
+	if (index == -1):
+		idx = Slots.size()
+	else:
+		idx = index 
 	var newItem = Thing.instance()
 	Items.add_child(newItem)
 	var alpha = (idx + 2.25) * AngularStep
@@ -56,4 +90,7 @@ func spawn_thing():
 	#newItem.set_rotation_degrees(randf()*360)
 	newItem.rocket = Rocket
 	newItem.active = false
-	Slots.push_back(newItem)
+	if Slots.size() <= idx:
+		Slots.push_back(newItem)
+	else:
+		Slots[idx] = newItem

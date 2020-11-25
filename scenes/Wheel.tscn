@@ -28,21 +28,21 @@ energy = 0.75
 
 [node name="AvailableItems" type="Node2D" parent="."]
 
-[node name="tips_" type="Node2D" parent="."]
+[node name="tips_DELETEME" type="Node2D" parent="."]
 visible = false
 
-[node name="tip_selection" type="Sprite" parent="tips_"]
+[node name="tip_selection" type="Sprite" parent="tips_DELETEME"]
 modulate = Color( 1, 1, 1, 0.752941 )
 position = Vector2( 611.292, -399.48 )
 scale = Vector2( 0.684854, 0.842119 )
 texture = ExtResource( 4 )
 
-[node name="tip_select_prev_next" type="Sprite" parent="tips_"]
+[node name="tip_select_prev_next" type="Sprite" parent="tips_DELETEME"]
 modulate = Color( 1, 1, 1, 0.752941 )
 position = Vector2( 233.981, -179.562 )
 texture = ExtResource( 5 )
 
-[node name="tip_confirm_selection" type="Sprite" parent="tips_"]
+[node name="tip_confirm_selection" type="Sprite" parent="tips_DELETEME"]
 modulate = Color( 1, 1, 1, 0.752941 )
 position = Vector2( 1050.34, -467.922 )
 texture = ExtResource( 6 )

@@ -73,45 +73,6 @@ scale_curve = SubResource( 6 )
 hue_variation = 0.1
 hue_variation_random = 0.58
 
-[sub_resource type="Animation" id=11]
-resource_name = "HideWheel"
-tracks/0/type = "value"
-tracks/0/path = NodePath("../Wheel:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 1080 ), Vector2( -633.069, 1719.06 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("../Wheel/tips:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0.752941 ), Color( 1, 1, 1, 0 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("../Wheel/tips:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.3, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ true, false, false ]
-}
-
 [sub_resource type="Animation" id=8]
 length = 5.0
 tracks/0/type = "value"
@@ -455,6 +416,45 @@ tracks/8/keys = {
 }
 
 [sub_resource type="Animation" id=10]
+resource_name = "HideWheel"
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Wheel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 1080 ), Vector2( -633.069, 1719.06 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Wheel/tips:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.752941 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Wheel/tips:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+
+[sub_resource type="Animation" id=11]
 resource_name = "ShowWheel"
 length = 1.5
 tracks/0/type = "value"
@@ -548,12 +548,16 @@ scale = Vector2( 0.541838, 0.544717 )
 texture = ExtResource( 10 )
 
 [node name="Inside" type="Area2D" parent="Rocket"]
-position = Vector2( -369.167, -296.354 )
+position = Vector2( 14.5663, -93.1552 )
 scale = Vector2( 0.416667, 0.416667 )
+
+[node name="Container" type="Node2D" parent="Rocket/Inside"]
+position = Vector2( -14.3936, -323.895 )
+scale = Vector2( 0.999999, 0.999999 )
 
 [node name="InsideShape" type="CollisionShape2D" parent="Rocket/Inside"]
 visible = false
-position = Vector2( 898.499, 152.685 )
+position = Vector2( -22.4276, -323.846 )
 shape = SubResource( 1 )
 
 [node name="SmokeLeft" type="Particles2D" parent="Rocket"]
@@ -610,16 +614,11 @@ randomness = 0.26
 process_material = SubResource( 7 )
 texture = ExtResource( 12 )
 
-[node name="Things" type="Node2D" parent="."]
-position = Vector2( 0.000122115, 1.48968e-005 )
-rotation = -4.65661e-010
-
 [node name="tip_start" type="Sprite" parent="."]
 visible = false
 modulate = Color( 1, 1, 1, 0.752941 )
 position = Vector2( 961.943, 997.961 )
 rotation = 0.0349066
-scale = Vector2( 1, 1 )
 texture = ExtResource( 13 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -633,6 +632,7 @@ scale = Vector2( 0.346559, 0.327987 )
 texture = ExtResource( 15 )
 
 [node name="Wheel" parent="." instance=ExtResource( 16 )]
+editor/display_folded = true
 position = Vector2( -633.069, 1719.06 )
 
 [node name="tips" type="Node2D" parent="Wheel"]
@@ -656,11 +656,21 @@ modulate = Color( 1, 1, 1, 0.752941 )
 position = Vector2( 1050.34, -467.922 )
 texture = ExtResource( 19 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="Things" type="Node2D" parent="."]
+position = Vector2( 158.846, 946.908 )
+rotation = -6.98492e-010
+scale = Vector2( 1, 1 )
+
+[node name="RocketAnimation" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Rocket")
-anims/HideWheel = SubResource( 11 )
 anims/RocketLanding = SubResource( 8 )
 anims/RocketLaunch = SubResource( 9 )
-anims/ShowWheel = SubResource( 10 )
 script = ExtResource( 20 )
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+
+[node name="WheelAnimation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Rocket")
+anims/HideWheel = SubResource( 10 )
+anims/ShowWheel = SubResource( 11 )
+script = ExtResource( 20 )
+[connection signal="animation_finished" from="RocketAnimation" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="WheelAnimation" to="." method="_on_AnimationPlayer_animation_finished"]
