@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://scenes/MainScene.gd" type="Script" id=1]
 [ext_resource path="res://assets/mainscene/background.png" type="Texture" id=2]
@@ -26,6 +26,9 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 295.56, 201.094 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 57.5424, 201.094 )
 
 [sub_resource type="Curve" id=2]
 max_value = 3.0
@@ -545,7 +548,6 @@ texture = ExtResource( 5 )
 position = Vector2( 1325.78, -220 )
 
 [node name="rocket1_inside" type="Sprite" parent="Rocket"]
-visible = false
 position = Vector2( -17.1292, -229.548 )
 scale = Vector2( 0.541838, 0.544717 )
 texture = ExtResource( 10 )
@@ -559,9 +561,17 @@ position = Vector2( -14.3936, -323.895 )
 scale = Vector2( 0.999999, 0.999999 )
 
 [node name="InsideShape" type="CollisionShape2D" parent="Rocket/Inside"]
-visible = false
 position = Vector2( -22.4276, -323.846 )
 shape = SubResource( 1 )
+
+[node name="Hatch" type="Area2D" parent="Rocket"]
+position = Vector2( 14.5663, -93.1552 )
+scale = Vector2( 0.416667, 0.416667 )
+
+[node name="HatchShape" type="CollisionShape2D" parent="Rocket/Hatch"]
+position = Vector2( -385.774, -334.212 )
+rotation = 0.261799
+shape = SubResource( 12 )
 
 [node name="SmokeLeft" type="Particles2D" parent="Rocket"]
 show_behind_parent = true

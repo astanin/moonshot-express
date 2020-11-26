@@ -36,14 +36,20 @@ func _process(delta):
 
 	var rocket_Inside = rocket.get_node("Inside")
 	var is_inside_rocket = rocket_Inside.overlaps_body(self)
-	if Input.is_action_pressed("place_item") and is_inside_rocket:
-		active = false
-		self.set_owner(rocket)
-		var fx = get_node("PlaceSound")
-		fx.play()
-		var MainScene = rocket.get_parent()
-		connect("item_placed", MainScene, "_on_Thing_item_placed")
-		emit_signal("item_placed", self)
+	var rocket_Hatch = rocket.get_node("Hatch")
+	var is_completely_inside = !rocket_Hatch.overlaps_body(self)
+	if Input.is_action_pressed("place_item"):
+		if is_inside_rocket and is_completely_inside:
+			active = false
+			self.set_owner(rocket)
+			var fx = get_node("PlaceSound")
+			fx.play()
+			var MainScene = rocket.get_parent()
+			connect("item_placed", MainScene, "_on_Thing_item_placed")
+			emit_signal("item_placed", self)
+		elif is_inside_rocket and !is_completely_inside:
+			var fx = get_node("FailSound")
+			fx.play()
 
 
 	direction = Vector2(0, 0)

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Cha_Ching_Register-Muska666-173262285.wav-138e9ca8c97a722ed885b5b64f2d2e45.sample"
+
+[deps]
+
+source_file="res://assets/sound/Cha_Ching_Register-Muska666-173262285.wav"
+dest_files=[ "res://.import/Cha_Ching_Register-Muska666-173262285.wav-138e9ca8c97a722ed885b5b64f2d2e45.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

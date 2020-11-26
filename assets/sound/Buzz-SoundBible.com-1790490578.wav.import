@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Buzz-SoundBible.com-1790490578.wav-8d4212376e9016ca2219e0b1623a68d9.sample"
+
+[deps]
+
+source_file="res://assets/sound/Buzz-SoundBible.com-1790490578.wav"
+dest_files=[ "res://.import/Buzz-SoundBible.com-1790490578.wav-8d4212376e9016ca2219e0b1623a68d9.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
