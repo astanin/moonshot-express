@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://scenes/MainScene.gd" type="Script" id=1]
 [ext_resource path="res://assets/mainscene/background.png" type="Texture" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://assets/tip_select_mini.png" type="Texture" id=20]
 [ext_resource path="res://scenes/AnimationPlayer.gd" type="Script" id=21]
 [ext_resource path="res://assets/tip_move_and_place.png" type="Texture" id=22]
+[ext_resource path="res://assets/tip_move_and_place_gamepad.png" type="Texture" id=23]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 295.56, 201.094 )
@@ -625,7 +626,6 @@ texture = ExtResource( 13 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
-autoplay = true
 
 [node name="SoundFX" type="Node" parent="."]
 
@@ -666,7 +666,6 @@ texture = ExtResource( 20 )
 [node name="Things" type="Node2D" parent="."]
 position = Vector2( 158.846, 946.908 )
 rotation = -6.98492e-010
-scale = Vector2( 1, 1 )
 
 [node name="RocketAnimation" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Rocket")
@@ -682,7 +681,12 @@ script = ExtResource( 21 )
 
 [node name="tip_move_and_place" type="Sprite" parent="."]
 visible = false
+modulate = Color( 1, 1, 1, 0.752941 )
 position = Vector2( 988.761, 814.66 )
 texture = ExtResource( 22 )
+
+[node name="tip_move_and_place_gamepad" type="Sprite" parent="tip_move_and_place"]
+position = Vector2( 4.89392, 144.235 )
+texture = ExtResource( 23 )
 [connection signal="animation_finished" from="RocketAnimation" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_finished" from="WheelAnimation" to="." method="_on_AnimationPlayer_animation_finished"]

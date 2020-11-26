@@ -19,6 +19,7 @@ func _ready():
 	tip_start.set_visible(true)
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	get_node("tip_move_and_place").hide()
+	get_node("AudioStreamPlayer").play()
 
 
 func cleanup_container(container):
@@ -45,8 +46,10 @@ func land_rocket():
 
 
 func _process(delta):
-	if Input.is_action_pressed("start"):
-		print("rocket:",RocketStatus,", wheel:",WheelVisible)
+	if Input.is_action_just_pressed("start"):
+		if RocketStatus == "InSpace":
+			land_rocket()
+	if Input.is_key_pressed(KEY_SPACE): # TODO replace with timer
 		if RocketStatus == "Landed":
 			launch_rocket()
 		elif RocketStatus == "InSpace":

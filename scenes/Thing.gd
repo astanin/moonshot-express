@@ -48,19 +48,21 @@ func _process(delta):
 
 	direction = Vector2(0, 0)
 	if Input.is_action_pressed("move_right"):
-		direction = Vector2(1, 0)
+		direction.x = Input.get_action_strength("move_right")
 	elif Input.is_action_pressed("move_left"):
-		direction = Vector2(-1, 0)
+		direction.x = -Input.get_action_strength("move_left")
 	if Input.is_action_pressed("move_up"):
-		direction.y = -1
+		direction.y = -Input.get_action_strength("move_up")
 	elif Input.is_action_pressed("move_down"):
-		direction.y = 1
+		direction.y = Input.get_action_strength("move_down")
 	move_and_collide(speed * direction * delta)
 
 	set_position(get_position() + speed * direction * delta)
 	if Input.is_action_pressed('rotate_cw'):
-		set_rotation_degrees(get_rotation_degrees() - angular_speed * delta)
+		var s = Input.get_action_strength("rotate_cw")
+		set_rotation_degrees(get_rotation_degrees() + s * angular_speed * delta)
 	if Input.is_action_pressed('rotate_ccw'):
-		set_rotation_degrees(get_rotation_degrees() + angular_speed * delta)
+		var s = Input.get_action_strength("rotate_ccw")
+		set_rotation_degrees(get_rotation_degrees() - s * angular_speed * delta)
 
 
