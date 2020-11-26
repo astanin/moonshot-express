@@ -58,11 +58,19 @@ func _process(delta):
 	move_and_collide(speed * direction * delta)
 
 	set_position(get_position() + speed * direction * delta)
+	var prev_rot = get_rotation_degrees()
+	# TODO: detect rotation collisions and  avoid rotations
+	var prev_t = get_transform()
+	var phi = 0
 	if Input.is_action_pressed('rotate_cw'):
 		var s = Input.get_action_strength("rotate_cw")
-		set_rotation_degrees(get_rotation_degrees() + s * angular_speed * delta)
+		phi = s * angular_speed * delta * PI / 180
 	if Input.is_action_pressed('rotate_ccw'):
 		var s = Input.get_action_strength("rotate_ccw")
-		set_rotation_degrees(get_rotation_degrees() - s * angular_speed * delta)
+		phi = - s * angular_speed * delta * PI / 180
+	var rotated_t = prev_t.rotated(phi)
+	var would_collide = test_move(rotated_t, Vector2(0, 0))
+	if !would_collide:
+		set_rotation(rotated_t.get_rotation())
 
 

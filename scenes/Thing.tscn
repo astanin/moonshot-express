@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://scenes/Thing.gd" type="Script" id=1]
 [ext_resource path="res://assets/light.png" type="Texture" id=2]
@@ -7,6 +7,28 @@
 [ext_resource path="res://assets/items/corgi.png" type="Texture" id=5]
 [ext_resource path="res://assets/items/bentley.png" type="Texture" id=6]
 [ext_resource path="res://assets/items/hippo.png" type="Texture" id=7]
+[ext_resource path="res://assets/items/Package1.png" type="Texture" id=8]
+[ext_resource path="res://assets/items/Package2.png" type="Texture" id=9]
+[ext_resource path="res://assets/items/Package3.png" type="Texture" id=10]
+[ext_resource path="res://assets/items/Package4.png" type="Texture" id=11]
+[ext_resource path="res://assets/items/Package5.png" type="Texture" id=12]
+[ext_resource path="res://assets/items/Package6.png" type="Texture" id=13]
+[ext_resource path="res://assets/items/Package7.png" type="Texture" id=14]
+[ext_resource path="res://assets/items/crane.png" type="Texture" id=15]
+[ext_resource path="res://assets/items/Crane2.png" type="Texture" id=16]
+[ext_resource path="res://assets/items/curiosity.png" type="Texture" id=17]
+[ext_resource path="res://assets/items/Duckie.png" type="Texture" id=18]
+[ext_resource path="res://assets/items/dynamite.png" type="Texture" id=19]
+[ext_resource path="res://assets/items/gamepad.png" type="Texture" id=20]
+[ext_resource path="res://assets/items/geodome.png" type="Texture" id=21]
+[ext_resource path="res://assets/items/goat.png" type="Texture" id=22]
+[ext_resource path="res://assets/items/quadro.png" type="Texture" id=23]
+[ext_resource path="res://assets/items/scraper.png" type="Texture" id=24]
+[ext_resource path="res://assets/items/Skate.png" type="Texture" id=25]
+[ext_resource path="res://assets/items/solarpannels.png" type="Texture" id=26]
+[ext_resource path="res://assets/items/sci.png" type="Texture" id=27]
+[ext_resource path="res://assets/items/usflag.png" type="Texture" id=28]
+[ext_resource path="res://assets/items/tank.png" type="Texture" id=29]
 
 [node name="Thing" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -21,6 +43,7 @@ color = Color( 0.94902, 0.894118, 0.0823529, 1 )
 energy = 0.85
 
 [node name="PlaceSound" type="AudioStreamPlayer2D" parent="."]
+visible = false
 stream = ExtResource( 3 )
 
 [node name="UnicornItem" type="CollisionPolygon2D" parent="."]
@@ -54,6 +77,7 @@ scale = Vector2( 0.585983, 0.585983 )
 texture = ExtResource( 6 )
 
 [node name="HippoItem" type="CollisionPolygon2D" parent="."]
+visible = false
 position = Vector2( -0.905533, -2.7166 )
 polygon = PoolVector2Array( -63.6698, 68.0604, -117.096, 65.3438, -137.018, 47.2332, -145.168, 11.0119, -131.585, -27.926, -100.797, -51.4698, -125.246, -102.18, -116.191, -104.896, -89.9303, -64.1472, -65.4809, -69.5804, -70.9141, -94.9353, -41.0315, -102.18, -33.7873, -81.3523, -14.7711, -82.2579, -6.62132, -103.991, 9.67827, -115.763, 26.8833, -116.668, 51.3327, -110.329, 67.6323, -95.8409, 67.6323, -71.3915, 93.8927, -46.9421, 111.098, -21.5872, 116.531, 11.0119, 111.098, 39.0834, 106.57, 53.5719, 30.5055, 61.7217 )
 
@@ -61,3 +85,234 @@ polygon = PoolVector2Array( -63.6698, 68.0604, -117.096, 65.3438, -137.018, 47.2
 position = Vector2( -15.2759, -23.2428 )
 scale = Vector2( 0.455345, 0.455345 )
 texture = ExtResource( 7 )
+
+[node name="Package1Item" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( -0.905533, -2.7166 )
+polygon = PoolVector2Array( -70.3209, 55.1614, -75.7277, -52.9734, 69.6535, -54.7756, 76.8624, 50.9561 )
+
+[node name="Package1" type="Sprite" parent="Package1Item"]
+position = Vector2( -0.634109, -0.708235 )
+scale = Vector2( 0.274621, 0.274621 )
+texture = ExtResource( 8 )
+
+[node name="Package2Item" type="CollisionPolygon2D" parent="."]
+position = Vector2( -0.905533, -2.7166 )
+polygon = PoolVector2Array( -115.45, 49.7264, -120.378, -48.8226, 113.676, -54.9819, 122.299, 48.4946 )
+
+[node name="Package2" type="Sprite" parent="Package2Item"]
+position = Vector2( 0.344681, 0.451906 )
+scale = Vector2( 0.30904, 0.30904 )
+texture = ExtResource( 9 )
+
+[node name="Package3Item" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( -0.905533, -2.7166 )
+polygon = PoolVector2Array( -71.7193, 55.8857, -75.4148, -53.75, 63.7856, -56.2138, 63.7856, 54.6539 )
+
+[node name="Package3" type="Sprite" parent="Package3Item"]
+position = Vector2( -7.66246, -2.01186 )
+scale = Vector2( 0.229892, 0.229892 )
+texture = ExtResource( 10 )
+
+[node name="Package4Item" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( -0.905533, -2.7166 )
+polygon = PoolVector2Array( -118.53, 78.0593, -128.385, -74.6917, 117.988, -84.5466, 126.611, 76.8274 )
+
+[node name="Package4" type="Sprite" parent="Package4Item"]
+position = Vector2( 3.42439, 2.91563 )
+scale = Vector2( 0.338567, 0.338567 )
+texture = ExtResource( 11 )
+
+[node name="Package5Item" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( -0.905533, -2.7166 )
+polygon = PoolVector2Array( -92.2886, 71.4991, -98.0358, -59.2482, 85.8726, -63.5586, 101.677, 64.3152 )
+
+[node name="Package5" type="Sprite" parent="Package5Item"]
+position = Vector2( -1.10027, 1.73753 )
+scale = Vector2( 0.278856, 0.278856 )
+texture = ExtResource( 12 )
+
+[node name="Package6Item" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( -0.905533, -2.7166 )
+polygon = PoolVector2Array( -47.7483, 38.4531, -47.7483, -30.5126, 55.7001, -29.0758, 57.1369, 38.4531 )
+
+[node name="Package6" type="Sprite" parent="Package6Item"]
+position = Vector2( 2.53908, 3.97029 )
+scale = Vector2( 0.127398, 0.127398 )
+texture = ExtResource( 13 )
+
+[node name="Package7Item" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( -0.905533, -2.7166 )
+polygon = PoolVector2Array( -204.358, 52.8209, -214.415, -33.3861, 205.126, -47.754, 205.126, 35.5795 )
+
+[node name="Package7" type="Sprite" parent="Package7Item"]
+position = Vector2( -3.20805, 1.0967 )
+scale = Vector2( 0.560028, 0.560028 )
+texture = ExtResource( 14 )
+
+[node name="Crane1Item" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( -3.28544, -1.14927 )
+scale = Vector2( 0.725007, 0.725007 )
+polygon = PoolVector2Array( -160.033, 111.98, -82.7741, -162.941, -40.6329, -161.937, -11.5355, -186.018, 0.504807, -164.947, 144.989, -159.931, 212.214, 115.993, 171.076, 118, 117.898, -123.81, 1.50819, -124.813, 15.5552, 14.654, -26.5859, 28.7011, -44.6464, -4.40983, -53.6766, -123.81, -111.871, 110.977 )
+
+[node name="crane" type="Sprite" parent="Crane1Item"]
+position = Vector2( 28.4012, -26.2022 )
+scale = Vector2( 0.687271, 0.687271 )
+texture = ExtResource( 15 )
+
+[node name="Crane21Item" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( -0.905533, -2.7166 )
+polygon = PoolVector2Array( -67.8633, 85.867, 95.9301, 85.867, 105.988, 65.752, 88.7462, 28.3956, 100.24, 2.53349, 78.6887, -116.72, 44.6526, -139.863, -46.6531, -132.84, -76.7539, -83.6753, -80.7673, -47.5543, -290.565, -217.294, -310.537, -204.078, -289.466, -45.5476, -298.496, 0.606981, -254.349, 18.6675, -233.093, -14.7079, -260.369, -25.4804, -276.423, -156.921, -96.8211, -3.40648, -75.7505, 27.6977, -81.7707, 60.8086 )
+
+[node name="Crane2" type="Sprite" parent="Crane21Item"]
+position = Vector2( -102.346, -57.8115 )
+scale = Vector2( 0.55583, 0.55583 )
+texture = ExtResource( 16 )
+
+[node name="CuriosityItem" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( -0.905533, -2.7166 )
+polygon = PoolVector2Array( -67.8633, 64.3152, -37.6908, 70.0623, -19.0127, 18.3381, 1.10231, 19.7749, -3.20805, 45.637, 68.6312, 75.8095, 91.6197, 61.4417, 81.5622, 22.6485, 62.884, -34.8229, 84.4358, -60.685, 47.0794, -83.6735, 28.4012, -53.5011, -7.51836, -53.5011, -7.51836, -90.8575, 15.4702, -110.972, -19.0127, -136.835, -46.3116, -109.536, -37.6908, -57.8114, -67.8633, -96.6046, -80.7944, -82.2368, -64.9897, -43.4436, -67.8633, -1.77687, -80.7944, 22.6485 )
+
+[node name="curiosity" type="Sprite" parent="CuriosityItem"]
+position = Vector2( -10.392, -33.3861 )
+scale = Vector2( 0.33429, 0.33429 )
+texture = ExtResource( 17 )
+
+[node name="DuckieItem" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( 2.97072, -24.568 )
+scale = Vector2( 0.283854, 0.283854 )
+polygon = PoolVector2Array( 11.5828, 271.69, 193.42, 250.476, 281.309, 153.496, 269.186, -1.06629, 247.972, -49.5564, 181.298, 53.485, 8.55215, 17.1175, 38.8584, -67.7401, 5.52151, -131.383, -94.4892, -143.506, -194.5, -95.0157, -206.622, -43.4951, -255.112, -10.1582, -161.163, 44.3931, -200.561, 123.189, -167.224, 211.078 )
+
+[node name="Duckie" type="Sprite" parent="DuckieItem"]
+position = Vector2( 14.719, 64.3878 )
+texture = ExtResource( 18 )
+
+[node name="DynamiteItem" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( 2.97072, -24.568 )
+scale = Vector2( 0.283854, 0.283854 )
+polygon = PoolVector2Array( -167.407, 308.88, -18.9469, 372.506, 182.535, 294.741, 232.022, 163.954, 129.514, -101.154, 193.14, -23.3889, 246.161, -157.71, 118.909, -412.214, -11.8774, -511.188, -156.803, -461.701, -262.846, -316.775, -301.729, -178.919 )
+
+[node name="dynamite" type="Sprite" parent="DynamiteItem"]
+position = Vector2( -18.1447, -66.5826 )
+scale = Vector2( 0.952237, 0.952237 )
+texture = ExtResource( 19 )
+
+[node name="GamepadItem" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( 2.97072, -24.568 )
+scale = Vector2( 0.283854, 0.283854 )
+polygon = PoolVector2Array( -181.547, 167.489, -139.129, -16.3193, -82.5728, -30.4584, -50.7599, 1.35455, 2.26176, 1.35455, 62.353, -30.4584, 97.7007, -23.3889, 171.931, 160.419, 115.375, 188.698, 41.1443, 171.024, 23.4703, 139.211, -33.086, 135.676, -93.1772, 199.302 )
+
+[node name="gamepad" type="Sprite" parent="GamepadItem"]
+position = Vector2( -8.34253, 79.1191 )
+scale = Vector2( 0.443006, 0.443005 )
+texture = ExtResource( 20 )
+
+[node name="GeodomeItem" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( 2.97072, -24.568 )
+scale = Vector2( 0.283854, 0.283854 )
+polygon = PoolVector2Array( -411.307, 337.158, -580.976, 319.484, -503.211, -111.758, -330.007, -355.658, -213.359, -398.075, 97.7007, -422.818, 274.439, -330.914, 405.226, -171.849, 585.499, 216.976, 299.183, 284.137, -100.247, 326.554 )
+
+[node name="geodome" type="Sprite" parent="GeodomeItem"]
+position = Vector2( -36.6209, -48.1323 )
+scale = Vector2( 2.15021, 2.15021 )
+texture = ExtResource( 21 )
+
+[node name="GoatItem" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( 2.97072, -24.568 )
+scale = Vector2( 0.283854, 0.283854 )
+polygon = PoolVector2Array( -104.816, 299.231, -20.3714, 291.189, 11.7979, 210.765, 25.8719, 289.178, 140.475, 287.167, 143.653, 103.863, 175.466, 142.746, 189.605, 75.5849, 124.39, -20.4513, 69.4225, -23.3889, 34.0747, -48.1323, -18.9469, -175.384, 27.0052, -231.941, -64.899, -217.802, -128.525, -228.406, -120.264, -359.128, -176.681, -346.108, -185.081, -246.08, -238.103, -196.593, -347.681, -200.128, -298.194, -140.036, -308.798, -44.5975, -280.52, 64.9805, -175.186, 124.31, -167.144, 204.734, -117.921, 149.815, -102.805, 226.85 )
+
+[node name="goat" type="Sprite" parent="GoatItem"]
+position = Vector2( -64.899, -30.4584 )
+scale = Vector2( 0.966117, 0.966117 )
+texture = ExtResource( 22 )
+
+[node name="QuadroItem" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( 2.97072, -24.568 )
+scale = Vector2( 0.283854, 0.283854 )
+polygon = PoolVector2Array( -286.639, 222.263, -306.689, 137.607, -257.677, 68.5451, -204.211, 77.4563, -193.072, -0.516319, -112.871, -25.022, -177.477, -134.184, -157.427, -156.462, -63.8598, -71.8056, 63.1241, -116.361, 60.8964, -38.3888, 89.8577, -36.1609, 190.108, -89.6279, 290.359, -65.1222, 259.17, 44.0395, 294.814, 122.012, 281.447, 211.124, 223.525, 255.68, 145.552, 224.49, 87.6299, 233.402, 49.7575, 306.919, -59.4043, 318.058, -141.832, 284.641, -157.427, 237.857, -253.222, 251.224 )
+
+[node name="quadro" type="Sprite" parent="QuadroItem"]
+position = Vector2( -7.42977, 87.8694 )
+scale = Vector2( 1.10658, 1.10658 )
+texture = ExtResource( 23 )
+
+[node name="ScaraperItem" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( 2.97072, -24.568 )
+scale = Vector2( 0.283854, 0.283854 )
+polygon = PoolVector2Array( -477.454, 80.9673, -487.071, -154.655, -212.98, -169.081, -208.171, -274.87, -73.53, -303.722, 157.283, -279.679, 214.987, -135.421, 234.221, -10.3964, 527.547, -318.148, 734.317, -202.741, 743.935, -44.0568, 835.298, 61.7329, 849.724, 162.714, 614.102, 268.503, 657.379, -15.205, 618.91, -169.081, 556.398, -202.741, 210.178, 167.522, 267.882, 282.929, 186.135, 306.972, -347.621, 306.972, -342.813, 191.566, -352.43, 133.862 )
+
+[node name="scraper" type="Sprite" parent="ScaraperItem"]
+position = Vector2( 162.092, -5.58785 )
+scale = Vector2( 3.52294, 3.52294 )
+texture = ExtResource( 24 )
+
+[node name="SkateItem" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( 2.97072, -24.568 )
+scale = Vector2( 0.283854, 0.283854 )
+polygon = PoolVector2Array( -251.449, 76.1588, -59.1043, 66.5414, 147.666, 28.0725, 210.178, 76.1588, 147.666, 143.479, 157.283, 191.566, 89.9628, 201.183, -15.8266, 172.331, -121.616, 181.948, -63.9129, 234.843, -131.233, 239.652, -289.918, 186.757, -265.875, 148.288, -323.578, 100.202 )
+
+[node name="Skate" type="Sprite" parent="SkateItem"]
+position = Vector2( -68.7215, 129.053 )
+scale = Vector2( 0.637769, 0.637769 )
+texture = ExtResource( 25 )
+
+[node name="SolarPanelsItem" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( 2.97072, -24.568 )
+scale = Vector2( 0.283854, 0.283854 )
+polygon = PoolVector2Array( 114.006, -327.765, 186.135, -255.636, 287.116, -308.531, 378.48, -226.784, 489.078, -298.913, 666.997, -106.569, -111.999, 436.805, -208.171, 369.484, -270.683, 417.571, -342.813, 350.25, -424.559, 427.188, -607.286, 177.14 )
+
+[node name="solarpannels" type="Sprite" parent="SolarPanelsItem"]
+position = Vector2( 27.4509, 56.9243 )
+scale = Vector2( 2.22482, 2.04301 )
+texture = ExtResource( 26 )
+
+[node name="SkiItem" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( 2.97072, -24.568 )
+scale = Vector2( 0.283854, 0.283854 )
+polygon = PoolVector2Array( -458.178, 77.4563, -384.661, 26.2171, -297.778, 55.1784, -230.944, 8.39483, -30.4429, 55.1784, 18.5684, 23.9893, 72.0353, 37.3561, 87.6299, 84.1397, 357.192, 159.885, 486.404, 153.201, 504.226, 191.074, 439.621, 255.68, 299.27, 242.313, 230.208, 286.869 )
+
+[node name="sci" type="Sprite" parent="SkiItem"]
+position = Vector2( 25.2518, 135.379 )
+scale = Vector2( 1.6552, 1.6552 )
+texture = ExtResource( 27 )
+
+[node name="USFlagItem" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( 2.97072, -24.568 )
+scale = Vector2( 0.283854, 0.283854 )
+polygon = PoolVector2Array( -404.237, 407.854, -421.911, -306.171, 507.734, -330.914, 490.061, 100.328, -354.75, 132.141, -326.472, 418.458 )
+
+[node name="usflag" type="Sprite" parent="USFlagItem"]
+position = Vector2( 37.6096, 36.7023 )
+scale = Vector2( 1.689, 1.689 )
+texture = ExtResource( 28 )
+
+[node name="TankItem" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( 2.97072, -24.568 )
+scale = Vector2( 0.283854, 0.283854 )
+polygon = PoolVector2Array( -477.454, -39.2482, -184.128, -193.124, 234.221, -188.315, 479.461, 61.7329, 440.992, 138.671, 267.882, 311.781, -333.195, 331.015, -535.157, 138.671, -530.349, 28.0725 )
+
+[node name="tank" type="Sprite" parent="TankItem"]
+position = Vector2( -35.0611, 71.35 )
+scale = Vector2( 1.63144, 1.63144 )
+texture = ExtResource( 29 )
