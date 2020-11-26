@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://scenes/MainScene.gd" type="Script" id=1]
 [ext_resource path="res://assets/mainscene/background.png" type="Texture" id=2]
@@ -20,24 +20,25 @@
 [ext_resource path="res://assets/tip_selection.png" type="Texture" id=18]
 [ext_resource path="res://assets/tip_select_prev_next.png" type="Texture" id=19]
 [ext_resource path="res://assets/tip_select_mini.png" type="Texture" id=20]
-[ext_resource path="res://scenes/AnimationPlayer.gd" type="Script" id=21]
-[ext_resource path="res://assets/tip_move_and_place.png" type="Texture" id=22]
-[ext_resource path="res://assets/tip_move_and_place_gamepad.png" type="Texture" id=23]
+[ext_resource path="res://scenes/CountdownTimer.tscn" type="PackedScene" id=21]
+[ext_resource path="res://scenes/AnimationPlayer.gd" type="Script" id=22]
+[ext_resource path="res://assets/tip_move_and_place.png" type="Texture" id=23]
+[ext_resource path="res://assets/tip_move_and_place_gamepad.png" type="Texture" id=24]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 295.56, 201.094 )
 
-[sub_resource type="RectangleShape2D" id=12]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 57.5424, 201.094 )
 
-[sub_resource type="Curve" id=2]
+[sub_resource type="Curve" id=3]
 max_value = 3.0
 _data = [ Vector2( 0.0107385, 0.472 ), 0.0, 5.56909, 0, 0, Vector2( 0.989262, 2.7408 ), -0.0359727, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=3]
-curve = SubResource( 2 )
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=4]
+[sub_resource type="ParticlesMaterial" id=5]
 emission_shape = 2
 emission_box_extents = Vector3( 1, 80, 1 )
 flag_disable_z = true
@@ -53,20 +54,20 @@ damping = 5.63
 damping_random = 0.06
 angle_random = 0.54
 scale = 1.41
-scale_curve = SubResource( 3 )
+scale_curve = SubResource( 4 )
 
-[sub_resource type="Curve" id=5]
+[sub_resource type="Curve" id=6]
 max_value = 2.0
 _data = [ Vector2( 0, 1.0176 ), 0.0, -0.606486, 0, 0, Vector2( 1, 0 ), -4.9376, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=6]
-curve = SubResource( 5 )
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
 
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticlesMaterial" id=8]
 emission_shape = 2
 emission_box_extents = Vector3( 15, 35, 1 )
 flag_disable_z = true
-spread = 19.18
+spread = 90.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 300.0
 angular_velocity = -224.26
@@ -75,11 +76,11 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.8
 scale_random = 0.43
-scale_curve = SubResource( 6 )
+scale_curve = SubResource( 7 )
 hue_variation = 0.1
 hue_variation_random = 0.58
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 length = 5.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
@@ -309,8 +310,20 @@ tracks/18/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0.752941 ), Color( 1, 1, 1, 0 ) ]
 }
+tracks/19/type = "value"
+tracks/19/path = NodePath("../CountdownTimer:visible")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 length = 5.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
@@ -420,9 +433,20 @@ tracks/8/keys = {
 "update": 0,
 "values": [ 16.4424, -88.9964 ]
 }
+tracks/9/type = "value"
+tracks/9/path = NodePath("../CountdownTimer:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
-[sub_resource type="Animation" id=10]
-resource_name = "HideWheel"
+[sub_resource type="Animation" id=11]
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Wheel:position")
 tracks/0/interp = 1
@@ -460,8 +484,7 @@ tracks/2/keys = {
 "values": [ true, false, false ]
 }
 
-[sub_resource type="Animation" id=11]
-resource_name = "ShowWheel"
+[sub_resource type="Animation" id=12]
 length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Wheel:position")
@@ -548,6 +571,7 @@ texture = ExtResource( 5 )
 position = Vector2( 1325.78, -220 )
 
 [node name="rocket1_inside" type="Sprite" parent="Rocket"]
+visible = false
 position = Vector2( -17.1292, -229.548 )
 scale = Vector2( 0.541838, 0.544717 )
 texture = ExtResource( 10 )
@@ -571,7 +595,7 @@ scale = Vector2( 0.416667, 0.416667 )
 [node name="HatchShape" type="CollisionShape2D" parent="Rocket/Hatch"]
 position = Vector2( -385.774, -334.212 )
 rotation = 0.261799
-shape = SubResource( 12 )
+shape = SubResource( 2 )
 
 [node name="SmokeLeft" type="Particles2D" parent="Rocket"]
 show_behind_parent = true
@@ -581,7 +605,7 @@ scale = Vector2( 0.4, 0.22 )
 amount = 12
 lifetime = 4.0
 speed_scale = 4.0
-process_material = SubResource( 4 )
+process_material = SubResource( 5 )
 texture = ExtResource( 11 )
 
 [node name="SmokeRight" type="Particles2D" parent="Rocket"]
@@ -592,7 +616,7 @@ scale = Vector2( 0.4, 0.22 )
 amount = 11
 lifetime = 4.0
 speed_scale = 4.0
-process_material = SubResource( 4 )
+process_material = SubResource( 5 )
 texture = ExtResource( 11 )
 
 [node name="FireLeft" type="Particles2D" parent="Rocket"]
@@ -608,7 +632,7 @@ preprocess = 15.58
 speed_scale = 10.0
 explosiveness = 0.21
 randomness = 0.21
-process_material = SubResource( 7 )
+process_material = SubResource( 8 )
 texture = ExtResource( 12 )
 
 [node name="FireRight" type="Particles2D" parent="Rocket"]
@@ -624,7 +648,7 @@ preprocess = 15.58
 speed_scale = 10.0
 explosiveness = 0.21
 randomness = 0.26
-process_material = SubResource( 7 )
+process_material = SubResource( 8 )
 texture = ExtResource( 12 )
 
 [node name="tip_start" type="Sprite" parent="."]
@@ -677,26 +701,32 @@ texture = ExtResource( 20 )
 position = Vector2( 158.846, 946.908 )
 rotation = -6.98492e-010
 
+[node name="CountdownTimer" parent="." instance=ExtResource( 21 )]
+visible = false
+position = Vector2( 1899.44, 153.869 )
+rotation = -2.32831e-010
+scale = Vector2( 1, 1 )
+
 [node name="RocketAnimation" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Rocket")
-anims/RocketLanding = SubResource( 8 )
-anims/RocketLaunch = SubResource( 9 )
-script = ExtResource( 21 )
+anims/RocketLanding = SubResource( 9 )
+anims/RocketLaunch = SubResource( 10 )
+script = ExtResource( 22 )
 
 [node name="WheelAnimation" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Rocket")
-anims/HideWheel = SubResource( 10 )
-anims/ShowWheel = SubResource( 11 )
-script = ExtResource( 21 )
+anims/HideWheel = SubResource( 11 )
+anims/ShowWheel = SubResource( 12 )
+script = ExtResource( 22 )
 
 [node name="tip_move_and_place" type="Sprite" parent="."]
 visible = false
 modulate = Color( 1, 1, 1, 0.752941 )
 position = Vector2( 988.761, 814.66 )
-texture = ExtResource( 22 )
+texture = ExtResource( 23 )
 
 [node name="tip_move_and_place_gamepad" type="Sprite" parent="tip_move_and_place"]
 position = Vector2( 4.89392, 144.235 )
-texture = ExtResource( 23 )
+texture = ExtResource( 24 )
 [connection signal="animation_finished" from="RocketAnimation" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_finished" from="WheelAnimation" to="." method="_on_AnimationPlayer_animation_finished"]
