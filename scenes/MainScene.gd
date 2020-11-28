@@ -28,7 +28,6 @@ func _ready():
 	Rocket.visible = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	get_node("tip_move_and_place").hide()
-	get_node("AudioStreamPlayer").play()
 	var balance = get_node("BalanceSheet")
 	balance.reset(StartingCash)
 	balance.visible = false
@@ -50,6 +49,8 @@ func launch_rocket():
 	fx.play()
 	cleanup_container(Things) # TODO add a nice animation
 	get_node("tip_move_and_place").hide()
+	var countdown = get_node("CountdownTimer")
+	countdown.hide()
 
 
 func land_rocket():
@@ -75,9 +76,9 @@ func _process(delta):
 	#	elif RocketStatus == "InSpace":
 	#		land_rocket()
 	if Input.is_key_pressed(KEY_M):
-		var audio = get_node("AudioStreamPlayer")
+		var audio = get_node("Soundtrack/MainTheme")
 		if audio.is_playing():
-			if audio.get_playback_position() > 0.3:
+			if audio.get_playback_position() > 1:
 				audio.stop()
 		else:
 			audio.play()
@@ -155,6 +156,9 @@ func begin_round():
 		) # triangular distribution on (0.8, 1.0, 1.2)x of AvgLaunchCost
 	balance.set_cost(-randomcost)
 	get_node("SoundFX/Loss").play()
+	get_node("Soundtrack/MainTheme/Transitions").play("FadeIn")
+	get_node("Soundtrack/MainTheme").play()
+
 
 
 func end_round():
@@ -172,6 +176,7 @@ func end_round():
 		get_node("SoundFX/Profit").play()
 	else:
 		get_node("SoundFX/Loss").play()
+	get_node("Soundtrack/MainTheme/Transitions").play("FadeOut")
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):

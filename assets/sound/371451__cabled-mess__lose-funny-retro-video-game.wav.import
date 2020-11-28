@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/371451__cabled-mess__lose-funny-retro-video-game.wav-035e4e1386cb2da71b20312a11ab8d04.sample"
+
+[deps]
+
+source_file="res://assets/sound/371451__cabled-mess__lose-funny-retro-video-game.wav"
+dest_files=[ "res://.import/371451__cabled-mess__lose-funny-retro-video-game.wav-035e4e1386cb2da71b20312a11ab8d04.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

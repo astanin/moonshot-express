@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://scenes/MainScene.gd" type="Script" id=1]
 [ext_resource path="res://assets/mainscene/background.png" type="Texture" id=2]
@@ -13,9 +13,9 @@
 [ext_resource path="res://assets/mainscene/smoke1.png" type="Texture" id=11]
 [ext_resource path="res://assets/mainscene/fire1.png" type="Texture" id=12]
 [ext_resource path="res://assets/mainscene/ladder.png" type="Texture" id=13]
-[ext_resource path="res://assets/sound/Ludum Dare 38 - Track 1.wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/sound/Ludum Dare 38 - Track 1.ogg" type="AudioStream" id=14]
 [ext_resource path="res://assets/sound/Atomic_Bomb-Sound_Explorer-897730679.wav" type="AudioStream" id=15]
-[ext_resource path="res://assets/sound/84422__darkunst__cafetiere.wav" type="AudioStream" id=16]
+[ext_resource path="res://assets/sound/landing2.ogg" type="AudioStream" id=16]
 [ext_resource path="res://assets/sound/Cha_Ching_Register-Muska666-173262285.wav" type="AudioStream" id=17]
 [ext_resource path="res://assets/sound/243020__plasterbrain__game-start.wav" type="AudioStream" id=18]
 [ext_resource path="res://assets/tip_start.png" type="Texture" id=19]
@@ -84,6 +84,37 @@ scale_random = 0.43
 scale_curve = SubResource( 7 )
 hue_variation = 0.1
 hue_variation_random = 0.58
+
+[sub_resource type="Animation" id=15]
+resource_name = "FadeIn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -80.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "FadeOut"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -80.0 ]
+}
 
 [sub_resource type="Animation" id=14]
 resource_name = "CashIn"
@@ -667,26 +698,34 @@ rotation = -0.00237134
 scale = Vector2( 0.346559, 0.327987 )
 texture = ExtResource( 13 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="Soundtrack" type="Node" parent="."]
+
+[node name="MainTheme" type="AudioStreamPlayer" parent="Soundtrack"]
 stream = ExtResource( 14 )
+volume_db = -40.0
+
+[node name="Transitions" type="AnimationPlayer" parent="Soundtrack/MainTheme"]
+anims/FadeIn = SubResource( 15 )
+anims/FadeOut = SubResource( 16 )
 
 [node name="SoundFX" type="Node" parent="."]
 
-[node name="RocketLaunch" type="AudioStreamPlayer" parent="SoundFX"]
+[node name="RocketLaunch" type="AudioStreamPlayer2D" parent="SoundFX"]
+position = Vector2( 1362.29, 239.555 )
 stream = ExtResource( 15 )
 
 [node name="RocketLanding" type="AudioStreamPlayer2D" parent="SoundFX"]
-visible = false
+position = Vector2( 1362.29, 291.507 )
 stream = ExtResource( 16 )
 volume_db = 20.0
 
 [node name="Profit" type="AudioStreamPlayer2D" parent="SoundFX"]
-visible = false
+position = Vector2( 424.272, 89.4724 )
 stream = ExtResource( 17 )
 volume_db = 10.0
 
 [node name="Loss" type="AudioStreamPlayer2D" parent="SoundFX"]
-visible = false
+position = Vector2( 421.386, 138.538 )
 stream = ExtResource( 18 )
 volume_db = 10.0
 
