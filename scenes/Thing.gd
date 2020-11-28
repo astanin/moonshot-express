@@ -136,3 +136,13 @@ func _process(delta):
 		set_rotation(rotated_t.get_rotation())
 
 
+func select_item():
+	var PriceLabel = get_node("PriceLabel")
+	PriceLabel.set_scale(Vector2(2, 2))
+
+
+func deselect_item():
+	var PriceLabel = get_node("PriceLabel")
+	PriceLabel.set_scale(Vector2(1, 1))
+
+

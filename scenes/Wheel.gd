@@ -44,6 +44,22 @@ func refill():
 			spawn_thing(i)
 	
 
+func deselect_item(index):
+	if Slots.size() <= index or index < 0:
+		pass
+	var Item = Slots[index]
+	if Item:
+		Item.deselect_item()
+
+
+func select_item(index):
+	if Slots.size() <= index or index < 0:
+		pass
+	var Item = Slots[index]
+	if Item:
+		Item.select_item()
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var rotating = is_rotating()
@@ -51,18 +67,22 @@ func _process(delta):
 		RotationTime += delta
 		var t = min(RotationTime/StepTime, 1)
 		Items.set_rotation(t*NextAngle + (1-t)*PrevAngle)
+	else:
+		select_item(SelectedIndex)
 	
 	if active and not rotating:
 		if Input.is_action_pressed("wheel_next"):
 			PrevAngle = Items.get_rotation()
 			NextAngle = PrevAngle - AngularStep
 			RotationTime = 0
+			deselect_item(SelectedIndex)
 			SelectedIndex = fmod(SelectedIndex + 1, NumberOfSlots)
 			Blip.play()
 		elif Input.is_action_pressed("wheel_prev"):
 			PrevAngle = Items.get_rotation()
 			NextAngle = PrevAngle + AngularStep
 			RotationTime = 0
+			deselect_item(SelectedIndex)
 			SelectedIndex = fmod(SelectedIndex - 1, NumberOfSlots)
 			Blip.play()
 		elif Input.is_action_just_pressed("wheel_select"):
