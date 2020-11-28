@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://scenes/MainScene.gd" type="Script" id=1]
 [ext_resource path="res://assets/mainscene/background.png" type="Texture" id=2]
@@ -15,15 +15,16 @@
 [ext_resource path="res://assets/tip_start.png" type="Texture" id=13]
 [ext_resource path="res://assets/sound/Ludum Dare 38 - Track 1.wav" type="AudioStream" id=14]
 [ext_resource path="res://assets/sound/Atomic_Bomb-Sound_Explorer-897730679.wav" type="AudioStream" id=15]
-[ext_resource path="res://assets/mainscene/ladder.png" type="Texture" id=16]
-[ext_resource path="res://scenes/Wheel.tscn" type="PackedScene" id=17]
-[ext_resource path="res://assets/tip_selection.png" type="Texture" id=18]
-[ext_resource path="res://assets/tip_select_prev_next.png" type="Texture" id=19]
-[ext_resource path="res://assets/tip_select_mini.png" type="Texture" id=20]
-[ext_resource path="res://scenes/CountdownTimer.tscn" type="PackedScene" id=21]
-[ext_resource path="res://scenes/AnimationPlayer.gd" type="Script" id=22]
-[ext_resource path="res://assets/tip_move_and_place.png" type="Texture" id=23]
-[ext_resource path="res://assets/tip_move_and_place_gamepad.png" type="Texture" id=24]
+[ext_resource path="res://assets/sound/84422__darkunst__cafetiere.wav" type="AudioStream" id=16]
+[ext_resource path="res://assets/mainscene/ladder.png" type="Texture" id=17]
+[ext_resource path="res://scenes/Wheel.tscn" type="PackedScene" id=18]
+[ext_resource path="res://assets/tip_selection.png" type="Texture" id=19]
+[ext_resource path="res://assets/tip_select_prev_next.png" type="Texture" id=20]
+[ext_resource path="res://assets/tip_select_mini.png" type="Texture" id=21]
+[ext_resource path="res://scenes/CountdownTimer.tscn" type="PackedScene" id=22]
+[ext_resource path="res://scenes/AnimationPlayer.gd" type="Script" id=23]
+[ext_resource path="res://assets/tip_move_and_place.png" type="Texture" id=24]
+[ext_resource path="res://assets/tip_move_and_place_gamepad.png" type="Texture" id=25]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 295.56, 201.094 )
@@ -666,13 +667,18 @@ stream = ExtResource( 14 )
 [node name="RocketLaunch" type="AudioStreamPlayer" parent="SoundFX"]
 stream = ExtResource( 15 )
 
+[node name="RocketLanding" type="AudioStreamPlayer2D" parent="SoundFX"]
+visible = false
+stream = ExtResource( 16 )
+volume_db = 10.0
+
 [node name="ladder" type="Sprite" parent="."]
 position = Vector2( 905.033, 1322.82 )
 rotation = -0.00237134
 scale = Vector2( 0.346559, 0.327987 )
-texture = ExtResource( 16 )
+texture = ExtResource( 17 )
 
-[node name="Wheel" parent="." instance=ExtResource( 17 )]
+[node name="Wheel" parent="." instance=ExtResource( 18 )]
 editor/display_folded = true
 position = Vector2( -633.069, 1719.06 )
 
@@ -685,48 +691,47 @@ position = Vector2( 0, -20 )
 modulate = Color( 1, 1, 1, 0.752941 )
 position = Vector2( 621.396, -376.203 )
 scale = Vector2( 0.684854, 0.842119 )
-texture = ExtResource( 18 )
+texture = ExtResource( 19 )
 
 [node name="tip_select_prev_next" type="Sprite" parent="Wheel/tips"]
 modulate = Color( 1, 1, 1, 0.752941 )
 position = Vector2( 233.981, -179.562 )
-texture = ExtResource( 19 )
+texture = ExtResource( 20 )
 
 [node name="tip_confirm_selection" type="Sprite" parent="Wheel/tips"]
 modulate = Color( 1, 1, 1, 0.752941 )
 position = Vector2( 1050.34, -467.922 )
-texture = ExtResource( 20 )
+texture = ExtResource( 21 )
 
 [node name="Things" type="Node2D" parent="."]
 position = Vector2( 158.846, 946.908 )
 rotation = -6.98492e-010
 
-[node name="CountdownTimer" parent="." instance=ExtResource( 21 )]
+[node name="CountdownTimer" parent="." instance=ExtResource( 22 )]
 visible = false
 position = Vector2( 1899.44, 153.869 )
 rotation = -2.32831e-010
-scale = Vector2( 1, 1 )
 
 [node name="RocketAnimation" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Rocket")
 anims/RocketLanding = SubResource( 9 )
 anims/RocketLaunch = SubResource( 10 )
-script = ExtResource( 22 )
+script = ExtResource( 23 )
 
 [node name="WheelAnimation" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Rocket")
 anims/HideWheel = SubResource( 11 )
 anims/ShowWheel = SubResource( 12 )
-script = ExtResource( 22 )
+script = ExtResource( 23 )
 
 [node name="tip_move_and_place" type="Sprite" parent="."]
 visible = false
 modulate = Color( 1, 1, 1, 0.752941 )
 position = Vector2( 988.761, 814.66 )
-texture = ExtResource( 23 )
+texture = ExtResource( 24 )
 
 [node name="tip_move_and_place_gamepad" type="Sprite" parent="tip_move_and_place"]
 position = Vector2( 4.89392, 144.235 )
-texture = ExtResource( 24 )
+texture = ExtResource( 25 )
 [connection signal="animation_finished" from="RocketAnimation" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_finished" from="WheelAnimation" to="." method="_on_AnimationPlayer_animation_finished"]

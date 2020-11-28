@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/84422__darkunst__cafetiere.wav-1e638dbb67e3bff43c90668b2421b68b.sample"
+
+[deps]
+
+source_file="res://assets/sound/84422__darkunst__cafetiere.wav"
+dest_files=[ "res://.import/84422__darkunst__cafetiere.wav-1e638dbb67e3bff43c90668b2421b68b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

@@ -45,6 +45,7 @@ func launch_rocket():
 func land_rocket():
 	RocketAnimation.play("RocketLanding")
 	RocketStatus = "IsLanding"
+	get_node("SoundFX/RocketLanding").play(48)
 
 
 func _process(delta):
@@ -98,6 +99,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		var timer = get_node("CountdownTimer")
 		timer.restart(CountdownTime, self)
 		WheelAnimation.play("ShowWheel")
+		get_node("SoundFX/RocketLanding").stop()
 	elif anim_name == "RocketLaunch":
 		RocketStatus = "InSpace"
 		cleanup_container(RocketInside)
