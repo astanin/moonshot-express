@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/MainScene.gd" type="Script" id=1]
 [ext_resource path="res://assets/mainscene/background.png" type="Texture" id=2]
 [ext_resource path="res://assets/mainscene/cactus2.png" type="Texture" id=3]
-[ext_resource path="res://assets/mainscene/billboard1.png" type="Texture" id=4]
+[ext_resource path="res://assets/mainscene/billboard2.png" type="Texture" id=4]
 [ext_resource path="res://assets/mainscene/cactus1.png" type="Texture" id=5]
 [ext_resource path="res://assets/mainscene/rock1.png" type="Texture" id=6]
 [ext_resource path="res://assets/mainscene/cactus3.png" type="Texture" id=7]
@@ -323,6 +323,18 @@ tracks/19/keys = {
 "update": 1,
 "values": [ false, true ]
 }
+tracks/20/type = "value"
+tracks/20/path = NodePath("../ladder:visible")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=10]
 length = 5.0
@@ -539,7 +551,6 @@ texture = ExtResource( 3 )
 
 [node name="Billboard" type="Sprite" parent="."]
 position = Vector2( 526.962, 646.497 )
-scale = Vector2( 1.56919, 1.50092 )
 texture = ExtResource( 4 )
 
 [node name="cactus1" type="Sprite" parent="."]
@@ -569,6 +580,7 @@ scale = Vector2( 0.145, -0.145 )
 texture = ExtResource( 5 )
 
 [node name="Rocket" parent="." instance=ExtResource( 9 )]
+visible = false
 position = Vector2( 1325.78, -220 )
 
 [node name="rocket1_inside" type="Sprite" parent="Rocket"]
@@ -673,13 +685,14 @@ stream = ExtResource( 16 )
 volume_db = 10.0
 
 [node name="ladder" type="Sprite" parent="."]
+visible = false
 position = Vector2( 905.033, 1322.82 )
 rotation = -0.00237134
 scale = Vector2( 0.346559, 0.327987 )
 texture = ExtResource( 17 )
 
 [node name="Wheel" parent="." instance=ExtResource( 18 )]
-editor/display_folded = true
+visible = false
 position = Vector2( -633.069, 1719.06 )
 
 [node name="tips" type="Node2D" parent="Wheel"]

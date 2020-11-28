@@ -8,10 +8,12 @@ onready var RocketInside = Rocket.get_node("Inside").get_node("Container")
 onready var Wheel = get_node("Wheel")
 onready var RocketAnimation = get_node("RocketAnimation")
 onready var WheelAnimation = get_node("WheelAnimation")
+
+
 onready var LastThing = null
 var RocketStatus = "InSpace" # "InSpace", "", or "Landed"
 var WheelVisible = false
-var CountdownTime = 60
+export var CountdownTime = 60
 
 
 # Called when the node enters the scene tree for the first time.
@@ -19,6 +21,7 @@ func _ready():
 	var tip_start = get_node("tip_start")
 	tip_start.set_visible(true)
 	Rocket.visible = true
+	Wheel.visible = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	get_node("tip_move_and_place").hide()
 	get_node("AudioStreamPlayer").play()
@@ -98,6 +101,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		RocketStatus = "Landed"
 		var timer = get_node("CountdownTimer")
 		timer.restart(CountdownTime, self)
+		Wheel.visible = true
 		WheelAnimation.play("ShowWheel")
 		get_node("SoundFX/RocketLanding").stop()
 	elif anim_name == "RocketLaunch":
