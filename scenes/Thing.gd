@@ -4,8 +4,9 @@ export var angular_speed = 180
 export var speed = 200
 export var active = false
 export var deliverycost = 0
-export var basecost = 200_000
+export var basecost = 220_000_000
 export var basesize = 200*200.0
+export var costexponent = 1.05
 
 
 var direction = Vector2(1, 0)
@@ -41,7 +42,7 @@ func choose_price(Item):
 	var extent= calc_extent(VisibleItem)
 	var size : float = extent[0]*extent[1]
 	#var p : float = VisibleItem.get_polygon().size() / 6.0
-	var targetprice = pow(size/basesize, 1.2) * basecost
+	var targetprice = pow(size/basesize, costexponent) * basecost
 	var randomprice = round(rand_range(0.9*targetprice, 1.1*targetprice))
 	return randomprice
 
