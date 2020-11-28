@@ -2,14 +2,67 @@ extends KinematicBody2D
 
 export var angular_speed = 180
 export var speed = 200
-export var direction = Vector2(1, 0)
 export var active = false
-export var type = ""
+export var deliverycost = 0
+export var basecost = 200_000
+export var basesize = 300*300.0
+
+
+var direction = Vector2(1, 0)
 var rocket = null
 
+
 var Items = []
+onready var VisibleItem = get_node("UnicornItem")
+
 
 signal item_placed(item)
+
+
+func calc_extent(Item):
+	var p = Item.get_polygon()
+	var xmin = 9999
+	var xmax = -9999
+	var ymin = 9999
+	var ymax = -9999
+	for pt in p:
+		var x = pt[0]
+		var y = pt[1]
+		xmin = min(xmin, x)
+		xmax = max(xmax, x)
+		ymin = min(ymin, y)
+		ymax = max(ymax, y)
+	return [xmax - xmin, ymax - ymin]
+
+
+func update_show_price():
+	# price proportional to the size
+	var extent = calc_extent(VisibleItem)
+	var size = extent[0]*extent[1]
+	deliverycost = pow(size/basesize, 1.1) * basecost
+	# format deliverycost
+	var n = deliverycost
+	var n_s : String = "%.0f" % (n)
+	if n >= 1e3:
+		n_s = n_s.insert(n_s.length()-3, ",")
+	if n >= 1e6:
+		n_s = n_s.insert(n_s.length()-6-1, ",")
+	if n >= 1e9:
+		n_s = n_s.insert(n_s.length()-9-2, ",")
+	var PriceLabel = get_node("PriceLabel")
+	# show deliverycost
+	PriceLabel.set_text("$" + n_s)
+	PriceLabel.visible = true
+
+
+func choose_item_type(idx):
+	VisibleItem = Items[idx]
+	#print("total items: ", Items.size(), ", random idx=", idx, ", selected=",VisibleItem.name)
+	VisibleItem.disabled = false
+	VisibleItem.visible = true
+	deliverycost = round(rand_range(200_000, 300_000))
+	update_show_price()
+	
 
 
 # Called when the node enters the scene tree for the first time.
@@ -22,11 +75,7 @@ func _ready():
 			Items.push_back(ch)
 	randomize()
 	var idx = randi() % Items.size()
-	var VisibleItem = Items[idx]
-	#print("total items: ", Items.size(), ", random idx=", idx, ", selected=",VisibleItem.name)
-	type = VisibleItem.name
-	VisibleItem.disabled = false
-	VisibleItem.visible = true
+	choose_item_type(idx)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

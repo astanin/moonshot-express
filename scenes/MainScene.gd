@@ -64,11 +64,12 @@ func _process(delta):
 
 
 func _on_Wheel_item_selected(item):
-	print("Selected: ", item.type, "@", item.get_global_position())
+	#print("Selected: ", item.VisibleItem.name, "@", item.get_global_position())
 	Wheel.active = false
 	if WheelVisible:
 		WheelAnimation.play("HideWheel", -1, 3.0)
 		get_node("tip_move_and_place").show()
+	item.get_node("PriceLabel").visible = false
 	item.active = true
 
 
@@ -82,7 +83,7 @@ func reparent(item, newcontainer):
 	
 
 func _on_Thing_item_placed(item):
-	print("Placed: ", item.type, "@", item.get_global_position())
+	print("Placed: ", item.VisibleItem.name, "@", item.get_global_position())
 	item.active = false
 	reparent(item, RocketInside)
 	if !WheelVisible:
