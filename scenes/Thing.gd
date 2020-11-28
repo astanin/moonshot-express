@@ -36,18 +36,6 @@ func calc_extent(Item):
 	return [xmax - xmin, ymax - ymin]
 
 
-func calc_price_position(Item, y_to_x = 1):
-	var p = Item.get_polygon()
-	var s = Item.get_scale()
-	var price_x = 0
-	for pt in p:
-		var x = pt[0]*s[0]
-		var y = pt[1]*s[1]
-		price_x = max(price_x, max(x, y / y_to_x))
-	var price_y = y_to_x * price_x
-	return Vector2(price_x, -price_y)
-
-
 func choose_price(Item):
 	# price proportional to its size and complexity
 	var extent= calc_extent(VisibleItem)
@@ -72,12 +60,6 @@ func update_show_price():
 	# show deliverycost
 	PriceLabel.set_text("$" + n_s)
 	PriceLabel.visible = true
-	var name = VisibleItem.name
-	var dp = PriceLabel.get_position()
-	var pp = calc_price_position(VisibleItem, 0.5)
-	var ip = VisibleItem.get_position()*VisibleItem.get_scale()
-	var np = pp - ip
-	PriceLabel.set_position(np)
 
 
 func choose_item_type(idx):

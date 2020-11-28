@@ -59,10 +59,10 @@ visible = false
 stream = ExtResource( 4 )
 
 [node name="PriceLabel" type="Label" parent="."]
-margin_left = 72.3421
-margin_top = -57.3278
-margin_right = 112.342
-margin_bottom = -43.3278
+margin_left = 180.0
+margin_top = -16.0
+margin_right = 348.0
+margin_bottom = 13.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 0.890196, 0, 1 )
 text = "$000,000,000"
@@ -230,6 +230,7 @@ scale = Vector2( 0.952237, 0.952237 )
 texture = ExtResource( 21 )
 
 [node name="GamepadItem" type="CollisionPolygon2D" parent="."]
+visible = false
 position = Vector2( 2.97072, -24.568 )
 scale = Vector2( 0.283854, 0.283854 )
 polygon = PoolVector2Array( -181.547, 167.489, -139.129, -16.3193, -82.5728, -30.4584, -50.7599, 1.35455, 2.26176, 1.35455, 62.353, -30.4584, 97.7007, -23.3889, 171.931, 160.419, 115.375, 188.698, 41.1443, 171.024, 23.4703, 139.211, -33.086, 135.676, -93.1772, 199.302 )
