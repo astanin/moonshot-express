@@ -112,11 +112,11 @@ func _on_Thing_item_placed(item):
 	item.active = false
 	reparent(item, RocketInside)
 	# show cach-in animation
-	#var PaymentFX = get_node("PaymentFX")
-	#PaymentFX.get_node("Payment").set_text(item.get_node("PriceLabel").get_text())
-	#PaymentFX.visible = true
-	#PaymentFX.set_global_position(item.get_global_position())
-	#PaymentFX.get_node("AnimationPlayer").play("CashIn")
+	var PaymentFX = get_node("PaymentFX")
+	PaymentFX.get_node("Label").set_text(item.get_node("PriceLabel").get_text())
+	PaymentFX.visible = true
+	PaymentFX.set_global_position(item.get_global_position())
+	PaymentFX.get_node("Label/AnimationPlayer").play("CashIn")
 	# update balance
 	var balance = get_node("BalanceSheet")
 	var deliverycost = item.deliverycost

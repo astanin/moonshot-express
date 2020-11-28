@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://scenes/MainScene.gd" type="Script" id=1]
 [ext_resource path="res://assets/mainscene/background.png" type="Texture" id=2]
@@ -25,10 +25,10 @@
 [ext_resource path="res://assets/tip_selection.png" type="Texture" id=23]
 [ext_resource path="res://assets/tip_select_prev_next.png" type="Texture" id=24]
 [ext_resource path="res://assets/tip_select_mini.png" type="Texture" id=25]
-[ext_resource path="res://scenes/PriceFont.tres" type="DynamicFont" id=26]
-[ext_resource path="res://scenes/CountdownTimer.tscn" type="PackedScene" id=27]
-[ext_resource path="res://scenes/BalanceSheet.tscn" type="PackedScene" id=28]
-[ext_resource path="res://scenes/AnimationPlayer.gd" type="Script" id=29]
+[ext_resource path="res://scenes/CountdownTimer.tscn" type="PackedScene" id=26]
+[ext_resource path="res://scenes/BalanceSheet.tscn" type="PackedScene" id=27]
+[ext_resource path="res://scenes/AnimationPlayer.gd" type="Script" id=28]
+[ext_resource path="res://assets/monogram.ttf" type="DynamicFontData" id=29]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 295.56, 201.094 )
@@ -115,9 +115,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 0.0, -80.0 ]
 }
-
-[sub_resource type="Animation" id=14]
-resource_name = "CashIn"
 
 [sub_resource type="Animation" id=9]
 length = 5.0
@@ -562,6 +559,63 @@ tracks/2/keys = {
 "values": [ false, true ]
 }
 
+[sub_resource type="DynamicFont" id=17]
+size = 36
+outline_size = 4
+outline_color = Color( 0.290196, 0.262745, 0.0627451, 1 )
+font_data = ExtResource( 29 )
+
+[sub_resource type="Animation" id=18]
+resource_name = "CashIn"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 5, 5 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:rect_pivot_offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 56, 15 ) ]
+}
+
 [node name="MainScene" type="Area2D"]
 rotation = 0.00296486
 script = ExtResource( 1 )
@@ -778,27 +832,12 @@ texture = ExtResource( 25 )
 position = Vector2( 158.846, 946.908 )
 rotation = -6.98492e-010
 
-[node name="PaymentFX" type="Node2D" parent="."]
-modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 80.0939, -119.75 )
-rotation = -2.32831e-010
-scale = Vector2( 1, 1 )
-
-[node name="PriceLabel" type="Label" parent="PaymentFX"]
-margin_right = 40.0
-margin_bottom = 14.0
-custom_fonts/font = ExtResource( 26 )
-text = "$12456"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PaymentFX"]
-anims/CashIn = SubResource( 14 )
-
-[node name="CountdownTimer" parent="." instance=ExtResource( 27 )]
+[node name="CountdownTimer" parent="." instance=ExtResource( 26 )]
 visible = false
 position = Vector2( 1915.24, 171.822 )
 rotation = -2.32831e-010
 
-[node name="BalanceSheet" parent="." instance=ExtResource( 28 )]
+[node name="BalanceSheet" parent="." instance=ExtResource( 27 )]
 visible = false
 rotation = -0.00296486
 scale = Vector2( 1, 1 )
@@ -807,12 +846,28 @@ scale = Vector2( 1, 1 )
 root_node = NodePath("../Rocket")
 anims/RocketLanding = SubResource( 9 )
 anims/RocketLaunch = SubResource( 10 )
-script = ExtResource( 29 )
+script = ExtResource( 28 )
 
 [node name="WheelAnimation" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Rocket")
 anims/HideWheel = SubResource( 11 )
 anims/ShowWheel = SubResource( 12 )
-script = ExtResource( 29 )
+script = ExtResource( 28 )
+
+[node name="PaymentFX" type="Node2D" parent="."]
+
+[node name="Label" type="Label" parent="PaymentFX"]
+anchor_right = 1.0
+margin_left = 60.5306
+margin_top = -72.7788
+margin_right = 158.531
+margin_bottom = -43.7788
+rect_pivot_offset = Vector2( 56, 15 )
+custom_fonts/font = SubResource( 17 )
+custom_colors/font_color = Color( 1, 0.890196, 0, 1 )
+text = "$123,456"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PaymentFX/Label"]
+anims/CashIn = SubResource( 18 )
 [connection signal="animation_finished" from="RocketAnimation" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_finished" from="WheelAnimation" to="." method="_on_AnimationPlayer_animation_finished"]
