@@ -2,8 +2,8 @@
 
 [ext_resource path="res://scenes/MainScene.gd" type="Script" id=1]
 [ext_resource path="res://assets/mainscene/background.png" type="Texture" id=2]
-[ext_resource path="res://assets/mainscene/cactus2.png" type="Texture" id=3]
-[ext_resource path="res://assets/mainscene/billboard2.png" type="Texture" id=4]
+[ext_resource path="res://assets/mainscene/billboard2.png" type="Texture" id=3]
+[ext_resource path="res://assets/mainscene/cactus2.png" type="Texture" id=4]
 [ext_resource path="res://assets/mainscene/cactus1.png" type="Texture" id=5]
 [ext_resource path="res://assets/mainscene/rock1.png" type="Texture" id=6]
 [ext_resource path="res://assets/mainscene/cactus3.png" type="Texture" id=7]
@@ -544,13 +544,14 @@ script = ExtResource( 1 )
 position = Vector2( 960, 535.146 )
 texture = ExtResource( 2 )
 
-[node name="cactus5" type="Sprite" parent="."]
-position = Vector2( 95.6816, 617.184 )
-scale = Vector2( -0.482, 0.52 )
+[node name="Billboard" type="Sprite" parent="."]
+position = Vector2( 363.04, 757.234 )
 texture = ExtResource( 3 )
 
-[node name="Billboard" type="Sprite" parent="."]
-position = Vector2( 526.962, 646.497 )
+[node name="cactus5" type="Sprite" parent="."]
+position = Vector2( 817.641, 709.168 )
+rotation = -3.14159
+scale = Vector2( 0.482, -0.52 )
 texture = ExtResource( 4 )
 
 [node name="cactus1" type="Sprite" parent="."]
@@ -569,7 +570,7 @@ scale = Vector2( 0.575708, 0.554906 )
 texture = ExtResource( 7 )
 
 [node name="rock2" type="Sprite" parent="."]
-position = Vector2( 655.303, 938.57 )
+position = Vector2( 657.525, 929.564 )
 scale = Vector2( 0.453221, 0.483586 )
 texture = ExtResource( 8 )
 
