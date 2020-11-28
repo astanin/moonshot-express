@@ -335,6 +335,18 @@ tracks/20/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/21/type = "value"
+tracks/21/path = NodePath(".:visible")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
 
 [sub_resource type="Animation" id=10]
 length = 5.0
@@ -709,12 +721,12 @@ texture = ExtResource( 19 )
 
 [node name="tip_select_prev_next" type="Sprite" parent="Wheel/tips"]
 modulate = Color( 1, 1, 1, 0.752941 )
-position = Vector2( 233.981, -179.562 )
+position = Vector2( 208.166, -235.061 )
 texture = ExtResource( 20 )
 
 [node name="tip_confirm_selection" type="Sprite" parent="Wheel/tips"]
 modulate = Color( 1, 1, 1, 0.752941 )
-position = Vector2( 1050.34, -467.922 )
+position = Vector2( 299.078, -83.0804 )
 texture = ExtResource( 21 )
 
 [node name="Things" type="Node2D" parent="."]
