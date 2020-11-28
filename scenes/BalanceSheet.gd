@@ -17,17 +17,18 @@ func reset(newcash):
 
 
 func format_money(n):
-	var n_s = "%.0f" % n
+	var is_negative = n < 0
+	var n_s = "%.0f" % abs(n)
 	var ts_pos = 3
 	var ts_pow = 3
 	while abs(n) >= pow(10, ts_pow):
 		n_s = n_s.insert(n_s.length() - ts_pos, ",")
 		ts_pos += 4
 		ts_pow += 3
-	if n >= 0:
-		n_s = " $" + n_s
+	if is_negative:
+		n_s = " -$" + n_s
 	else:
-		n_s = "-$" + n_s
+		n_s = " $" + n_s
 	return n_s
 
 

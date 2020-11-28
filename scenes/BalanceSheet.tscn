@@ -26,7 +26,7 @@ margin_top = 53.5125
 margin_right = 890.0
 margin_bottom = 117.512
 custom_fonts/font = ExtResource( 2 )
-custom_colors/font_color = Color( 0.941176, 0.160784, 0.0588235, 1 )
+custom_colors/font_color = Color( 0.721569, 0.137255, 0.0627451, 1 )
 text = "-$0,000,000,000"
 align = 2
 
