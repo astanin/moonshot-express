@@ -11,9 +11,12 @@ onready var WheelAnimation = get_node("WheelAnimation")
 
 
 onready var LastThing = null
+var BeginRound = true
 var RocketStatus = "InSpace" # "InSpace", "", or "Landed"
 var WheelVisible = false
 export var CountdownTime = 60
+export var StartingCash = 1_000_000_000.0
+export var AvgLaunchCost = 800_000_000.0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -24,6 +27,8 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	get_node("tip_move_and_place").hide()
 	get_node("AudioStreamPlayer").play()
+	var balance = get_node("BalanceSheet")
+	balance.reset(StartingCash)
 
 
 func cleanup_container(container):
@@ -48,6 +53,7 @@ func land_rocket():
 	RocketAnimation.play("RocketLanding")
 	RocketStatus = "IsLanding"
 	get_node("SoundFX/RocketLanding").play(48)
+	BeginRound = true
 
 
 func _process(delta):
@@ -60,6 +66,12 @@ func _process(delta):
 			launch_rocket()
 		elif RocketStatus == "InSpace":
 			land_rocket()
+	if Input.is_key_pressed(KEY_M):
+		var audio = get_node("AudioStreamPlayer")
+		if audio.is_playing():
+			audio.stop()
+		else:
+			audio.play()
 
 
 func _on_Wheel_item_selected(item):
@@ -85,6 +97,11 @@ func _on_Thing_item_placed(item):
 	print("Placed: ", item.VisibleItem.name, "@", item.get_global_position())
 	item.active = false
 	reparent(item, RocketInside)
+	# update balance
+	var balance = get_node("BalanceSheet")
+	var deliverycost = item.deliverycost
+	balance.increase_revenue(deliverycost)
+	# show wheel, hide tips
 	if !WheelVisible:
 		Wheel.visible = true
 		WheelAnimation.play("ShowWheel", -1, 3.0)
@@ -95,13 +112,42 @@ func _on_Thing_item_placed(item):
 func _on_CountdownTimer_count_zero():
 	if RocketStatus == "Landed":
 		launch_rocket()
-	
+		end_round()
+
+
+# game states: # TODO rewrite as a formal FSM
+# (Rocket in Space)
+# [start] -> (Rocket landed, Wheel not available)
+# [delay] -> (Rocket landed, Wheel available, show balance & countdown)
+#     [count_zero] -> (Rocket launching, hide everything)
+#                     [delay] -> (Rocket in Space, show results)
+#     [select_item] -> (Placing item)
+#                      [place_item] -> (Rocket landed, Wheel available)
+
+func begin_round():
+	BeginRound = false
+	var timer = get_node("CountdownTimer")
+	timer.visible = true
+	timer.restart(CountdownTime, self)
+	var balance = get_node("BalanceSheet")
+	balance.visible = true
+	var randomcost = round(
+		rand_range(0.4*AvgLaunchCost, 0.6*AvgLaunchCost) +
+		rand_range(0.4*AvgLaunchCost, 0.6*AvgLaunchCost)
+		) # triangular distribution on (0.8, 1.0, 1.2)x of AvgLaunchCost
+	balance.set_cost(randomcost)
+
+
+func end_round():
+	var timer = get_node("CountdownTimer")
+	timer.visible = false
+	#var balance = get_node("BalanceSheet")
+	#balance.visible = false
+
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "RocketLanding":
 		RocketStatus = "Landed"
-		var timer = get_node("CountdownTimer")
-		timer.restart(CountdownTime, self)
 		Wheel.visible = true
 		WheelAnimation.play("ShowWheel")
 		get_node("SoundFX/RocketLanding").stop()
@@ -110,6 +156,8 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		cleanup_container(RocketInside)
 		Wheel.refill()
 	elif anim_name == "ShowWheel":
+		if BeginRound:
+			begin_round()
 		WheelVisible = true
 		Wheel.active = true
 		Wheel.visible = true

@@ -2,13 +2,10 @@
 
 [ext_resource path="res://scenes/CountdownTimer.gd" type="Script" id=1]
 [ext_resource path="res://assets/monogram.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://scenes/InfoFont.tres" type="DynamicFont" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 192
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=2]
-size = 80
 font_data = ExtResource( 2 )
 
 [node name="CountdownTimer" type="Node2D"]
@@ -25,10 +22,10 @@ color = Color( 0.384314, 0.0980392, 0.0980392, 0.752941 )
 [node name="TimeDisplay" type="Label" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -1082.28
-margin_top = -150.316
-margin_right = -2.2771
-margin_bottom = 1.68372
+margin_left = -388.0
+margin_top = -150.0
+margin_right = -3.0
+margin_bottom = 2.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "99999"
@@ -39,7 +36,7 @@ margin_left = -367.44
 margin_top = -168.688
 margin_right = -7.43951
 margin_bottom = -104.688
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "LAUNCHING IN"
 

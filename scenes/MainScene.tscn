@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://scenes/MainScene.gd" type="Script" id=1]
 [ext_resource path="res://assets/mainscene/background.png" type="Texture" id=2]
@@ -22,9 +22,10 @@
 [ext_resource path="res://assets/tip_select_prev_next.png" type="Texture" id=20]
 [ext_resource path="res://assets/tip_select_mini.png" type="Texture" id=21]
 [ext_resource path="res://scenes/CountdownTimer.tscn" type="PackedScene" id=22]
-[ext_resource path="res://scenes/AnimationPlayer.gd" type="Script" id=23]
-[ext_resource path="res://assets/tip_move_and_place.png" type="Texture" id=24]
-[ext_resource path="res://assets/tip_move_and_place_gamepad.png" type="Texture" id=25]
+[ext_resource path="res://scenes/BalanceSheet.tscn" type="PackedScene" id=23]
+[ext_resource path="res://scenes/AnimationPlayer.gd" type="Script" id=24]
+[ext_resource path="res://assets/tip_move_and_place.png" type="Texture" id=25]
+[ext_resource path="res://assets/tip_move_and_place_gamepad.png" type="Texture" id=26]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 295.56, 201.094 )
@@ -312,36 +313,24 @@ tracks/18/keys = {
 "values": [ Color( 1, 1, 1, 0.752941 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/19/type = "value"
-tracks/19/path = NodePath("../CountdownTimer:visible")
+tracks/19/path = NodePath("../ladder:visible")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/imported = false
 tracks/19/enabled = true
 tracks/19/keys = {
-"times": PoolRealArray( 0, 5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
-}
-tracks/20/type = "value"
-tracks/20/path = NodePath("../ladder:visible")
-tracks/20/interp = 1
-tracks/20/loop_wrap = true
-tracks/20/imported = false
-tracks/20/enabled = true
-tracks/20/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
 }
-tracks/21/type = "value"
-tracks/21/path = NodePath(".:visible")
-tracks/21/interp = 1
-tracks/21/loop_wrap = true
-tracks/21/imported = false
-tracks/21/enabled = true
-tracks/21/keys = {
+tracks/20/type = "value"
+tracks/20/path = NodePath(".:visible")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
 "times": PoolRealArray( 0, 5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -457,18 +446,6 @@ tracks/8/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 16.4424, -88.9964 ]
-}
-tracks/9/type = "value"
-tracks/9/path = NodePath("../CountdownTimer:visible")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
 }
 
 [sub_resource type="Animation" id=11]
@@ -593,7 +570,6 @@ scale = Vector2( 0.145, -0.145 )
 texture = ExtResource( 5 )
 
 [node name="Rocket" parent="." instance=ExtResource( 9 )]
-visible = false
 position = Vector2( 1325.78, -220 )
 
 [node name="rocket1_inside" type="Sprite" parent="Rocket"]
@@ -678,9 +654,8 @@ process_material = SubResource( 8 )
 texture = ExtResource( 12 )
 
 [node name="tip_start" type="Sprite" parent="."]
-visible = false
 modulate = Color( 1, 1, 1, 0.752941 )
-position = Vector2( 961.943, 997.961 )
+position = Vector2( 1018.91, 985.062 )
 rotation = 0.0349066
 texture = ExtResource( 13 )
 
@@ -738,26 +713,31 @@ visible = false
 position = Vector2( 1915.24, 171.822 )
 rotation = -2.32831e-010
 
+[node name="BalanceSheet" parent="." instance=ExtResource( 23 )]
+visible = false
+rotation = -0.00296486
+scale = Vector2( 1, 1 )
+
 [node name="RocketAnimation" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Rocket")
 anims/RocketLanding = SubResource( 9 )
 anims/RocketLaunch = SubResource( 10 )
-script = ExtResource( 23 )
+script = ExtResource( 24 )
 
 [node name="WheelAnimation" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Rocket")
 anims/HideWheel = SubResource( 11 )
 anims/ShowWheel = SubResource( 12 )
-script = ExtResource( 23 )
+script = ExtResource( 24 )
 
 [node name="tip_move_and_place" type="Sprite" parent="."]
 visible = false
 modulate = Color( 1, 1, 1, 0.752941 )
-position = Vector2( 988.761, 814.66 )
-texture = ExtResource( 24 )
+position = Vector2( 1040.38, 853.889 )
+texture = ExtResource( 25 )
 
 [node name="tip_move_and_place_gamepad" type="Sprite" parent="tip_move_and_place"]
 position = Vector2( 4.89392, 144.235 )
-texture = ExtResource( 25 )
+texture = ExtResource( 26 )
 [connection signal="animation_finished" from="RocketAnimation" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_finished" from="WheelAnimation" to="." method="_on_AnimationPlayer_animation_finished"]
