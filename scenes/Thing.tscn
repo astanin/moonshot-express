@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://scenes/Thing.gd" type="Script" id=1]
 [ext_resource path="res://assets/light.png" type="Texture" id=2]
@@ -30,13 +30,7 @@
 [ext_resource path="res://assets/items/sci.png" type="Texture" id=28]
 [ext_resource path="res://assets/items/usflag.png" type="Texture" id=29]
 [ext_resource path="res://assets/items/tank.png" type="Texture" id=30]
-[ext_resource path="res://assets/monogram.ttf" type="DynamicFontData" id=31]
-
-[sub_resource type="DynamicFont" id=1]
-size = 36
-outline_size = 4
-outline_color = Color( 0.289063, 0.264265, 0.0632324, 1 )
-font_data = ExtResource( 31 )
+[ext_resource path="res://scenes/PriceFont.tres" type="DynamicFont" id=31]
 
 [node name="Thing" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -335,6 +329,6 @@ margin_left = 180.0
 margin_top = -16.0
 margin_right = 348.0
 margin_bottom = 13.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = ExtResource( 31 )
 custom_colors/font_color = Color( 1, 0.890196, 0, 1 )
 text = "$000,000,000"

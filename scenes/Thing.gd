@@ -103,6 +103,7 @@ func get_type():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	randomize()
 	for ch in get_children():
 		var ch_name = ch.name
 		if ch_name.ends_with("Item"):
@@ -111,6 +112,17 @@ func _ready():
 			Items.push_back(ch)
 	if !VisibleItem:
 		choose_random_type()
+
+
+func place_item():
+	active = false
+	self.set_owner(rocket)
+	var fx = get_node("PlaceSound")
+	fx.play()
+	# signal to MainScene
+	var MainScene = rocket.get_parent()
+	connect("item_placed", MainScene, "_on_Thing_item_placed")
+	emit_signal("item_placed", self)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -124,13 +136,7 @@ func _process(delta):
 	var is_completely_inside = !rocket_Hatch.overlaps_body(self)
 	if Input.is_action_pressed("place_item"):
 		if is_inside_rocket and is_completely_inside:
-			active = false
-			self.set_owner(rocket)
-			var fx = get_node("PlaceSound")
-			fx.play()
-			var MainScene = rocket.get_parent()
-			connect("item_placed", MainScene, "_on_Thing_item_placed")
-			emit_signal("item_placed", self)
+			place_item()
 		elif is_inside_rocket and !is_completely_inside:
 			var fx = get_node("FailSound")
 			fx.play()

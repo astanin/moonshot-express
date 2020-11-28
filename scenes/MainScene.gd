@@ -12,6 +12,7 @@ onready var WheelAnimation = get_node("WheelAnimation")
 
 onready var LastThing = null
 var BeginRound = true
+var FirstRound = true
 var RocketStatus = "InSpace" # "InSpace", "", or "Landed"
 var WheelVisible = false
 export var CountdownTime = 60
@@ -30,6 +31,7 @@ func _ready():
 	get_node("AudioStreamPlayer").play()
 	var balance = get_node("BalanceSheet")
 	balance.reset(StartingCash)
+	balance.visible = false
 
 
 func cleanup_container(container):
@@ -53,8 +55,13 @@ func launch_rocket():
 func land_rocket():
 	RocketAnimation.play("RocketLanding")
 	RocketStatus = "IsLanding"
-	get_node("SoundFX/RocketLanding").play(48)
+	get_node("SoundFX/RocketLanding").play()
 	BeginRound = true
+	var balance = get_node("BalanceSheet")
+	balance.visible = true
+	if FirstRound:
+		get_node("SoundFX/Profit").play()
+		FirstRound = false
 
 
 func _process(delta):
@@ -62,21 +69,24 @@ func _process(delta):
 		if RocketStatus == "InSpace":
 			land_rocket()
 	# DEBUG ONLY:
-	if Input.is_key_pressed(KEY_SPACE): # TODO replace with timer
-		if RocketStatus == "Landed":
-			launch_rocket()
-		elif RocketStatus == "InSpace":
-			land_rocket()
+	#if Input.is_key_pressed(KEY_SPACE): # TODO replace with timer
+	#	if RocketStatus == "Landed":
+	#		launch_rocket()
+	#	elif RocketStatus == "InSpace":
+	#		land_rocket()
 	if Input.is_key_pressed(KEY_M):
 		var audio = get_node("AudioStreamPlayer")
 		if audio.is_playing():
-			audio.stop()
+			if audio.get_playback_position() > 0.3:
+				audio.stop()
 		else:
 			audio.play()
 
 
 func _on_Wheel_item_selected(item):
-	#print("Selected: ", item.VisibleItem.name, "@", item.get_global_position())
+	if RocketStatus != "Landed":
+		return
+	print("Selected: ", item.VisibleItem.name, "@", item.get_global_position())
 	Wheel.active = false
 	if WheelVisible:
 		WheelAnimation.play("HideWheel", -1, 3.0)
@@ -95,9 +105,17 @@ func reparent(item, newcontainer):
 	
 
 func _on_Thing_item_placed(item):
+	if RocketStatus != "Landed":
+		return
 	print("Placed: ", item.VisibleItem.name, "@", item.get_global_position())
 	item.active = false
 	reparent(item, RocketInside)
+	# show cach-in animation
+	#var PaymentFX = get_node("PaymentFX")
+	#PaymentFX.get_node("Payment").set_text(item.get_node("PriceLabel").get_text())
+	#PaymentFX.visible = true
+	#PaymentFX.set_global_position(item.get_global_position())
+	#PaymentFX.get_node("AnimationPlayer").play("CashIn")
 	# update balance
 	var balance = get_node("BalanceSheet")
 	var deliverycost = item.deliverycost
@@ -113,7 +131,6 @@ func _on_Thing_item_placed(item):
 func _on_CountdownTimer_count_zero():
 	if RocketStatus == "Landed":
 		launch_rocket()
-		end_round()
 
 
 # game states: # TODO rewrite as a formal FSM
@@ -136,29 +153,41 @@ func begin_round():
 		rand_range(0.4*AvgLaunchCost, 0.6*AvgLaunchCost) +
 		rand_range(0.4*AvgLaunchCost, 0.6*AvgLaunchCost)
 		) # triangular distribution on (0.8, 1.0, 1.2)x of AvgLaunchCost
-	balance.set_cost(randomcost)
+	balance.set_cost(-randomcost)
+	get_node("SoundFX/Loss").play()
 
 
 func end_round():
 	var timer = get_node("CountdownTimer")
 	timer.visible = false
-	#var balance = get_node("BalanceSheet")
+	var balance = get_node("BalanceSheet")
 	#balance.visible = false
+	var cost = balance.cost
+	var revenue = balance.revenue
+	var cash = balance.cash
+	var profit = revenue + cost # cost is negative
+	var newcash = cash + profit
+	balance.reset(newcash)
+	if profit > 0:
+		get_node("SoundFX/Profit").play()
+	else:
+		get_node("SoundFX/Loss").play()
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "RocketLanding":
 		RocketStatus = "Landed"
 		Wheel.visible = true
+		if BeginRound:
+			begin_round()
 		WheelAnimation.play("ShowWheel")
 		get_node("SoundFX/RocketLanding").stop()
 	elif anim_name == "RocketLaunch":
 		RocketStatus = "InSpace"
 		cleanup_container(RocketInside)
 		Wheel.refill()
+		end_round()
 	elif anim_name == "ShowWheel":
-		if BeginRound:
-			begin_round()
 		WheelVisible = true
 		Wheel.active = true
 		Wheel.visible = true
