@@ -21,7 +21,6 @@ func _ready():
 	var tip_start = get_node("tip_start")
 	tip_start.set_visible(true)
 	Rocket.visible = true
-	Wheel.visible = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	get_node("tip_move_and_place").hide()
 	get_node("AudioStreamPlayer").play()
@@ -87,6 +86,7 @@ func _on_Thing_item_placed(item):
 	item.active = false
 	reparent(item, RocketInside)
 	if !WheelVisible:
+		Wheel.visible = true
 		WheelAnimation.play("ShowWheel", -1, 3.0)
 	Wheel.active = true
 	get_node("tip_move_and_place").hide()
@@ -112,6 +112,8 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 	elif anim_name == "ShowWheel":
 		WheelVisible = true
 		Wheel.active = true
+		Wheel.visible = true
 	elif anim_name == "HideWheel":
 		WheelVisible = false
 		Wheel.active = false
+		Wheel.visible = false
