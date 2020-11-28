@@ -1,18 +1,15 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/Wheel.gd" type="Script" id=1]
-[ext_resource path="res://assets/items/wheel.png" type="Texture" id=2]
+[ext_resource path="res://assets/mainscene/wheel.png" type="Texture" id=2]
 [ext_resource path="res://assets/light.png" type="Texture" id=3]
-[ext_resource path="res://assets/tip_selection.png" type="Texture" id=4]
-[ext_resource path="res://assets/tip_select_prev_next.png" type="Texture" id=5]
-[ext_resource path="res://assets/tip_select_mini.png" type="Texture" id=6]
-[ext_resource path="res://assets/sound/Robot_blip-Marianne_Gagnon-120342607.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sound/Robot_blip-Marianne_Gagnon-120342607.wav" type="AudioStream" id=4]
 
 [node name="Wheel" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="WheelBg" type="Sprite" parent="."]
-modulate = Color( 0, 0, 0, 1 )
+modulate = Color( 0, 0, 0, 0.752941 )
 self_modulate = Color( 0.337255, 0.337255, 0.337255, 1 )
 position = Vector2( 3.16968, 0 )
 scale = Vector2( 2.5, 2.5 )
@@ -29,27 +26,8 @@ energy = 0.75
 
 [node name="AvailableItems" type="Node2D" parent="."]
 
-[node name="tips_DELETEME" type="Node2D" parent="."]
-visible = false
-
-[node name="tip_selection" type="Sprite" parent="tips_DELETEME"]
-modulate = Color( 1, 1, 1, 0.752941 )
-position = Vector2( 611.292, -399.48 )
-scale = Vector2( 0.684854, 0.842119 )
-texture = ExtResource( 4 )
-
-[node name="tip_select_prev_next" type="Sprite" parent="tips_DELETEME"]
-modulate = Color( 1, 1, 1, 0.752941 )
-position = Vector2( 233.981, -179.562 )
-texture = ExtResource( 5 )
-
-[node name="tip_confirm_selection" type="Sprite" parent="tips_DELETEME"]
-modulate = Color( 1, 1, 1, 0.752941 )
-position = Vector2( 1050.34, -467.922 )
-texture = ExtResource( 6 )
-
 [node name="SoundFX" type="Node" parent="."]
 
 [node name="Blip" type="AudioStreamPlayer" parent="SoundFX"]
-stream = ExtResource( 7 )
+stream = ExtResource( 4 )
 volume_db = -10.0

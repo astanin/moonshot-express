@@ -692,12 +692,11 @@ scale = Vector2( 0.346559, 0.327987 )
 texture = ExtResource( 17 )
 
 [node name="Wheel" parent="." instance=ExtResource( 18 )]
-visible = false
 position = Vector2( -633.069, 1719.06 )
 
 [node name="tips" type="Node2D" parent="Wheel"]
 visible = false
-modulate = Color( 1, 1, 1, 0.752941 )
+modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 0, -20 )
 
 [node name="tip_selection" type="Sprite" parent="Wheel/tips"]
@@ -722,7 +721,7 @@ rotation = -6.98492e-010
 
 [node name="CountdownTimer" parent="." instance=ExtResource( 22 )]
 visible = false
-position = Vector2( 1899.44, 153.869 )
+position = Vector2( 1915.24, 171.822 )
 rotation = -2.32831e-010
 
 [node name="RocketAnimation" type="AnimationPlayer" parent="."]
