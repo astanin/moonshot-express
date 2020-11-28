@@ -23,7 +23,7 @@ text = "99999"
 align = 2
 
 [node name="TimerTick" type="Timer" parent="."]
-wait_time = 0.15
+wait_time = 0.02
 autostart = true
 
 [node name="TimerCountdown" type="Timer" parent="."]
