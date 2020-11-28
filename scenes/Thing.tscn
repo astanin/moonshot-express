@@ -59,7 +59,6 @@ visible = false
 stream = ExtResource( 4 )
 
 [node name="PriceLabel" type="Label" parent="."]
-visible = false
 margin_left = 72.3421
 margin_top = -57.3278
 margin_right = 112.342

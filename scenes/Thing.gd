@@ -5,7 +5,7 @@ export var speed = 200
 export var active = false
 export var deliverycost = 0
 export var basecost = 200_000
-export var basesize = 300*300.0
+export var basesize = 200*200.0
 
 
 var direction = Vector2(1, 0)
@@ -21,13 +21,14 @@ signal item_placed(item)
 
 func calc_extent(Item):
 	var p = Item.get_polygon()
+	var s = Item.get_scale()
 	var xmin = 9999
 	var xmax = -9999
 	var ymin = 9999
 	var ymax = -9999
 	for pt in p:
-		var x = pt[0]
-		var y = pt[1]
+		var x = pt[0]*s[0]
+		var y = pt[1]*s[1]
 		xmin = min(xmin, x)
 		xmax = max(xmax, x)
 		ymin = min(ymin, y)
@@ -35,11 +36,29 @@ func calc_extent(Item):
 	return [xmax - xmin, ymax - ymin]
 
 
+func calc_price_position(Item, y_to_x = 1):
+	var p = Item.get_polygon()
+	var s = Item.get_scale()
+	var price_x = 0
+	for pt in p:
+		var x = pt[0]*s[0]
+		var y = pt[1]*s[1]
+		price_x = max(price_x, max(x, y / y_to_x))
+	var price_y = y_to_x * price_x
+	return Vector2(price_x, -price_y)
+
+
+func choose_price(Item):
+	# price proportional to its size and complexity
+	var extent= calc_extent(VisibleItem)
+	var size : float = extent[0]*extent[1]
+	#var p : float = VisibleItem.get_polygon().size() / 6.0
+	var targetprice = pow(size/basesize, 1.2) * basecost
+	var randomprice = round(rand_range(0.9*targetprice, 1.1*targetprice))
+	return randomprice
+
+	
 func update_show_price():
-	# price proportional to the size
-	var extent = calc_extent(VisibleItem)
-	var size = extent[0]*extent[1]
-	deliverycost = pow(size/basesize, 1.1) * basecost
 	# format deliverycost
 	var n = deliverycost
 	var n_s : String = "%.0f" % (n)
@@ -53,6 +72,12 @@ func update_show_price():
 	# show deliverycost
 	PriceLabel.set_text("$" + n_s)
 	PriceLabel.visible = true
+	var name = VisibleItem.name
+	var dp = PriceLabel.get_position()
+	var pp = calc_price_position(VisibleItem, 0.5)
+	var ip = VisibleItem.get_position()*VisibleItem.get_scale()
+	var np = pp - ip
+	PriceLabel.set_position(np)
 
 
 func choose_item_type(idx):
@@ -60,7 +85,7 @@ func choose_item_type(idx):
 	#print("total items: ", Items.size(), ", random idx=", idx, ", selected=",VisibleItem.name)
 	VisibleItem.disabled = false
 	VisibleItem.visible = true
-	deliverycost = round(rand_range(200_000, 300_000))
+	deliverycost = choose_price(VisibleItem)
 	update_show_price()
 	
 
