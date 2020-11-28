@@ -14,7 +14,9 @@ var rocket = null
 
 
 var Items = []
-onready var VisibleItem = get_node("UnicornItem")
+var UniqueSlots = []
+onready var VisibleItem : CollisionPolygon2D = null
+onready var VisibleType : String = ""
 
 
 signal item_placed(item)
@@ -63,14 +65,40 @@ func update_show_price():
 	PriceLabel.visible = true
 
 
-func choose_item_type(idx):
+func is_unique(Item):
+	var type : String = get_type()
+	if type.begins_with("Package"):
+		return true  # all packages are considered unique
+	for OtherItem in UniqueSlots:
+		if not OtherItem:
+			continue
+		var other_type : String = OtherItem.get_type()
+		if other_type == type:
+			return false
+	return true
+
+
+func choose_random_type():
+	var idx = randi() % Items.size()
+	while not is_unique(Items[idx]):
+		idx = randi() % Items.size()
 	VisibleItem = Items[idx]
+	VisibleType = VisibleItem.name
+	if not VisibleType.begins_with("Package"):
+		pass
 	#print("total items: ", Items.size(), ", random idx=", idx, ", selected=",VisibleItem.name)
 	VisibleItem.disabled = false
 	VisibleItem.visible = true
 	deliverycost = choose_price(VisibleItem)
 	update_show_price()
-	
+	return VisibleItem.name
+
+
+func get_type():
+	if VisibleItem:
+		return VisibleItem.name
+	else:
+		return ""
 
 
 # Called when the node enters the scene tree for the first time.
@@ -81,9 +109,8 @@ func _ready():
 			ch.disabled = true
 			ch.visible = false
 			Items.push_back(ch)
-	randomize()
-	var idx = randi() % Items.size()
-	choose_item_type(idx)
+	if !VisibleItem:
+		choose_random_type()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -20,6 +20,7 @@ var active = false
 var PrevAngle = 0
 var NextAngle = 0
 var RotationTime = -1
+var UniqueItems = true
 
 
 signal item_selected(item)
@@ -101,6 +102,13 @@ func _process(delta):
 				Blip.play()
 
 
+func is_unique_type(type):
+	for Item in Slots:
+		if Item and Item.get_type() == type:
+			return false
+	return true
+			
+
 func spawn_thing(index = -1):
 	var idx
 	if (index == -1):
@@ -108,6 +116,10 @@ func spawn_thing(index = -1):
 	else:
 		idx = index 
 	var newItem = Thing.instance()
+	if UniqueItems:
+		newItem.UniqueSlots = Slots
+	else:
+		newItem.UniqueSlots = []
 	Items.add_child(newItem)
 	var alpha = (idx + 2.25) * AngularStep
 	var pos = Vector2(ItemRadius, 0).rotated(alpha) 

@@ -21,6 +21,7 @@ export var AvgLaunchCost = 800_000_000.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	randomize()
 	var tip_start = get_node("tip_start")
 	tip_start.set_visible(true)
 	Rocket.visible = true
