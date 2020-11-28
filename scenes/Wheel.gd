@@ -61,6 +61,18 @@ func select_item(index):
 		Item.select_item()
 
 
+func hide_deliverycost():
+	for Item in Slots:
+		if Item:
+			Item.get_node("PriceLabel").hide()
+
+
+func show_deliverycost():
+	for Item in Slots:
+		if Item:
+			Item.get_node("PriceLabel").show()
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var rotating = is_rotating()

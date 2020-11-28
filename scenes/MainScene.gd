@@ -186,6 +186,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		if BeginRound:
 			begin_round()
 		WheelAnimation.play("ShowWheel")
+		Wheel.hide_deliverycost()
 		get_node("SoundFX/RocketLanding").stop()
 	elif anim_name == "RocketLaunch":
 		RocketStatus = "InSpace"
@@ -196,6 +197,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		WheelVisible = true
 		Wheel.active = true
 		Wheel.visible = true
+		Wheel.show_deliverycost()
 	elif anim_name == "HideWheel":
 		WheelVisible = false
 		Wheel.active = false
