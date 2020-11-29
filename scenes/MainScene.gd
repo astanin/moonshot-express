@@ -222,12 +222,13 @@ func end_round():
 	balance.reset(cash + profit)
 	show_summary(profit, cash + profit)
 	# increase discount to make the next round harder
-	var BreakEvenDiscount = cost / revenue
-	var NewDiscount = DiscountCoef*0.9 + BreakEvenDiscount*0.1 # exponential smoothing
-	print("Old discount: ", 100*(1-DiscountCoef), "%; ",
-	      "New discount: ", 100*(1-NewDiscount), "%")
-	DiscountCoef = NewDiscount
-	Wheel.apply_discount(DiscountCoef)
+	if revenue > 0:
+		var BreakEvenDiscount = cost / revenue
+		var NewDiscount = DiscountCoef*0.9 + BreakEvenDiscount*0.1 # exponential smoothing
+		print("Old discount: ", 100*(1-DiscountCoef), "%; ",
+		      "New discount: ", 100*(1-NewDiscount), "%")
+		DiscountCoef = NewDiscount
+		Wheel.apply_discount(DiscountCoef)
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):

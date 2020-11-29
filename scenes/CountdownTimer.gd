@@ -34,6 +34,8 @@ func _on_TimerTick_timeout():
 
 
 func _on_TimerSeconds_timeout():
+	if !visible:
+		return
 	var t = TimerCountdown.get_time_left()
 	if t <= 10 and t > 0:
 		get_node("Beep").play()
