@@ -223,9 +223,10 @@ func end_round():
 	show_summary(profit, cash + profit)
 	# increase discount to make the next round harder
 	var BreakEvenDiscount = cost / revenue
-	var newDiscount = DiscountCoef*0.9 + BreakEvenDiscount*0.1 # exponential smoothing
-	print("old discount:", 100*(1-DiscountCoef), " new discount:", 100*1-newDiscount)
-	DiscountCoef = newDiscount
+	var NewDiscount = DiscountCoef*0.9 + BreakEvenDiscount*0.1 # exponential smoothing
+	print("Old discount: ", 100*(1-DiscountCoef), "%; ",
+	      "New discount: ", 100*(1-NewDiscount), "%")
+	DiscountCoef = NewDiscount
 	Wheel.apply_discount(DiscountCoef)
 
 
