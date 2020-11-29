@@ -13,7 +13,7 @@ font_data = ExtResource( 1 )
 size = 120
 font_data = ExtResource( 1 )
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "GameOver"
 length = 2.0
 loop = true
@@ -126,8 +126,7 @@ tracks/8/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "Loss"
+[sub_resource type="Animation" id=4]
 length = 2.0
 loop = true
 tracks/0/type = "value"
@@ -215,8 +214,7 @@ tracks/6/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "Profit"
+[sub_resource type="Animation" id=5]
 length = 2.0
 loop = true
 tracks/0/type = "value"
@@ -363,6 +361,7 @@ text = "-$00,000,000"
 align = 1
 
 [node name="GameOver" type="Node2D" parent="."]
+visible = false
 
 [node name="GameOver" type="Label" parent="GameOver"]
 margin_left = -541.225
@@ -424,9 +423,9 @@ text = "+$00,000,000"
 align = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/GameOver = SubResource( 5 )
-anims/Loss = SubResource( 3 )
-anims/Profit = SubResource( 4 )
+anims/GameOver = SubResource( 3 )
+anims/Loss = SubResource( 4 )
+anims/Profit = SubResource( 5 )
 
 [node name="tip_start" type="Sprite" parent="."]
 position = Vector2( 42.9753, 672.027 )
