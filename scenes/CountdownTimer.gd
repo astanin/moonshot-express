@@ -33,7 +33,15 @@ func _on_TimerTick_timeout():
 		TimeDisplay.add_color_override("font_color", Color.crimson)
 
 
+func _on_TimerSeconds_timeout():
+	var t = TimerCountdown.get_time_left()
+	if t <= 10 and t > 0:
+		get_node("Beep").play()
+
+
 func _on_TimerCountdown_timeout():
 	TimerCountdown.stop()
 	emit_signal("count_zero")
+
+
 

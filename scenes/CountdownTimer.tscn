@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/CountdownTimer.gd" type="Script" id=1]
 [ext_resource path="res://assets/monogram.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://scenes/InfoFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/sound/271163__alienxxx__beep-008.wav" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 192
@@ -44,7 +45,15 @@ text = "LAUNCHING IN"
 wait_time = 0.01
 autostart = true
 
+[node name="TimerSeconds" type="Timer" parent="."]
+autostart = true
+
 [node name="TimerCountdown" type="Timer" parent="."]
 wait_time = 60.0
+
+[node name="Beep" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( -195.411, 11.6913 )
+stream = ExtResource( 4 )
 [connection signal="timeout" from="TimerTick" to="." method="_on_TimerTick_timeout"]
+[connection signal="timeout" from="TimerSeconds" to="." method="_on_TimerSeconds_timeout"]
 [connection signal="timeout" from="TimerCountdown" to="." method="_on_TimerCountdown_timeout"]
