@@ -14,7 +14,6 @@ var direction = Vector2(1, 0)
 var rocket = null
 
 
-var Items = []
 var UniqueSlots = []
 onready var VisibleItem : CollisionPolygon2D = null
 onready var VisibleType : String = ""
@@ -74,32 +73,41 @@ func apply_discount(discountcoef):
 
 
 func is_unique(Item):
-	var type : String = get_type()
-	if type.begins_with("Package"):
-		return true  # all packages are considered unique
+	var type : String = Item.name
 	for OtherItem in UniqueSlots:
 		if not OtherItem:
 			continue
 		var other_type : String = OtherItem.get_type()
 		if other_type == type:
+			#print("is_unique: ", type, " is not unique, ", other_type, " exists")
 			return false
+	#print("is_unique: ", type, " OK")
 	return true
 
 
 func choose_random_type():
+	# the list of types to choose from, exclude duplicates
+	var Items : Array = []
+	for ch in get_children():
+		var ch_name = ch.name
+		# consider only unique for type selection, and Packages
+		if ch_name.ends_with("Item"):
+			# disable all other items, we can be changing type
+			ch.visible = false
+			ch.disabled = true
+			if ch_name.begins_with("Package"):
+				Items.push_back(ch)
+			elif is_unique(ch):
+				Items.push_back(ch)
+	# uniform distribution
 	var idx = randi() % Items.size()
-	while not is_unique(Items[idx]):
-		idx = randi() % Items.size()
 	VisibleItem = Items[idx]
 	VisibleType = VisibleItem.name
-	if not VisibleType.begins_with("Package"):
-		pass
-	#print("total items: ", Items.size(), ", random idx=", idx, ", selected=",VisibleItem.name)
 	VisibleItem.disabled = false
 	VisibleItem.visible = true
 	choose_price(VisibleItem)
 	update_show_price()
-	return VisibleItem.name
+	return get_type()
 
 
 func get_type():
@@ -111,13 +119,13 @@ func get_type():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	randomize()
+	# hide all alternative items
 	for ch in get_children():
 		var ch_name = ch.name
 		if ch_name.ends_with("Item"):
 			ch.disabled = true
 			ch.visible = false
-			Items.push_back(ch)
+	randomize()
 	if !VisibleItem:
 		choose_random_type()
 

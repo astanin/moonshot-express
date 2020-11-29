@@ -173,12 +173,12 @@ position = Vector2( 28.4012, -26.2022 )
 scale = Vector2( 0.687271, 0.687271 )
 texture = ExtResource( 16 )
 
-[node name="Crane21Item" type="CollisionPolygon2D" parent="."]
+[node name="Crane2Item" type="CollisionPolygon2D" parent="."]
 visible = false
 position = Vector2( -0.905533, -2.7166 )
 polygon = PoolVector2Array( -67.8633, 85.867, 95.9301, 85.867, 105.988, 65.752, 88.7462, 28.3956, 100.24, 2.53349, 78.6887, -116.72, 44.6526, -139.863, -46.6531, -132.84, -76.7539, -83.6753, -80.7673, -47.5543, -290.565, -217.294, -310.537, -204.078, -289.466, -45.5476, -298.496, 0.606981, -254.349, 18.6675, -233.093, -14.7079, -260.369, -25.4804, -276.423, -156.921, -96.8211, -3.40648, -75.7505, 27.6977, -81.7707, 60.8086 )
 
-[node name="Crane2" type="Sprite" parent="Crane21Item"]
+[node name="Crane2" type="Sprite" parent="Crane2Item"]
 position = Vector2( -102.346, -57.8115 )
 scale = Vector2( 0.55583, 0.55583 )
 texture = ExtResource( 17 )
