@@ -222,9 +222,10 @@ func end_round():
 	balance.reset(cash + profit)
 	show_summary(profit, cash + profit)
 	# increase discount to make the next round harder
-	if revenue > 0:
-		var BreakEvenDiscount = cost / revenue
-		var NewDiscount = DiscountCoef*0.9 + BreakEvenDiscount*0.1 # exponential smoothing
+	if profit > 0:
+		var BreakEvenDiscount = abs(cost) / revenue
+		print("Cost/Revenue ratio: ", BreakEvenDiscount)
+		var NewDiscount = DiscountCoef*0.75 + BreakEvenDiscount*0.25 # exponential smoothing
 		print("Old discount: ", 100*(1-DiscountCoef), "%; ",
 		      "New discount: ", 100*(1-NewDiscount), "%")
 		DiscountCoef = NewDiscount
