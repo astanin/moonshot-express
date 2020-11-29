@@ -3,6 +3,7 @@ extends KinematicBody2D
 export var angular_speed = 180
 export var speed = 200
 export var active = false
+export var nodiscountcost = 0
 export var deliverycost = 0
 export var basecost = 220_000_000
 export var basesize = 200*200.0
@@ -45,11 +46,12 @@ func choose_price(Item):
 	var size : float = extent[0]*extent[1]
 	var targetprice = pow(size/basesize, costexponent) * basecost
 	var randomprice = round(rand_range(0.8*targetprice, 1.2*targetprice))
+	nodiscountcost = randomprice
 	deliverycost = randomprice
 	return randomprice
 
 	
-func update_show_price():
+func update_show_price(show = true):
 	# format deliverycost
 	var n = deliverycost
 	var n_s : String = "%.0f" % (n)
@@ -62,7 +64,13 @@ func update_show_price():
 	var PriceLabel = get_node("PriceLabel")
 	# show deliverycost
 	PriceLabel.set_text("$" + n_s)
-	PriceLabel.visible = true
+	if show:
+		PriceLabel.visible = true
+
+
+func apply_discount(discountcoef):
+	deliverycost = nodiscountcost * discountcoef
+	update_show_price()
 
 
 func is_unique(Item):

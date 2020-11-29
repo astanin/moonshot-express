@@ -18,6 +18,7 @@ var WheelVisible = false
 export var CountdownTime = 60
 export var StartingCash = 1_000_000_000.0
 export var AvgLaunchCost = 800_000_000.0
+export var DiscountCoef = 1.0 # 1.0 = no discount = easy
 
 
 func reset_balance():
@@ -185,7 +186,7 @@ func format_money(n):
 	if is_negative:
 		n_s = " -$" + n_s
 	else:
-		n_s = " $" + n_s
+		n_s = "+$" + n_s
 	return n_s
 
 
@@ -220,6 +221,12 @@ func end_round():
 	var profit = revenue + cost # cost is negative
 	balance.reset(cash + profit)
 	show_summary(profit, cash + profit)
+	# increase discount to make the next round harder
+	var BreakEvenDiscount = cost / revenue
+	var newDiscount = DiscountCoef*0.9 + BreakEvenDiscount*0.1 # exponential smoothing
+	print("old discount:", 100*(1-DiscountCoef), " new discount:", 100*1-newDiscount)
+	DiscountCoef = newDiscount
+	Wheel.apply_discount(DiscountCoef)
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):

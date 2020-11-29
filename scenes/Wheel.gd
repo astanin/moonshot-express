@@ -21,6 +21,7 @@ var PrevAngle = 0
 var NextAngle = 0
 var RotationTime = -1
 var UniqueItems = true
+var DiscountCoef = 1.0
 
 
 signal item_selected(item)
@@ -72,6 +73,13 @@ func show_deliverycost():
 		if Item:
 			Item.get_node("PriceLabel").show()
 
+
+func apply_discount(discountcoef):
+	DiscountCoef = discountcoef
+	for Item in Slots:
+		if Item:
+			Item.apply_discount(discountcoef)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -132,6 +140,8 @@ func spawn_thing(index = -1):
 		newItem.UniqueSlots = Slots
 	else:
 		newItem.UniqueSlots = []
+	newItem.choose_random_type()
+	newItem.apply_discount(DiscountCoef)
 	Items.add_child(newItem)
 	var alpha = (idx + 2.25) * AngularStep
 	var pos = Vector2(ItemRadius, 0).rotated(alpha) 
