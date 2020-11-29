@@ -20,6 +20,12 @@ export var StartingCash = 1_000_000_000.0
 export var AvgLaunchCost = 800_000_000.0
 
 
+func reset_balance():
+	var balance = get_node("BalanceSheet")
+	balance.reset(StartingCash)
+	balance.visible = false
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
@@ -28,10 +34,8 @@ func _ready():
 	Rocket.visible = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	get_node("tip_move_and_place").hide()
-	var balance = get_node("BalanceSheet")
-	balance.reset(StartingCash)
-	balance.visible = false
 	get_node("RoundSummary").visible = false
+	reset_balance()
 
 
 func cleanup_container(container):
@@ -45,6 +49,10 @@ func launch_rocket():
 	RocketStatus = "IsLaunching"
 	if WheelVisible:
 		WheelAnimation.play("HideWheel")
+	else: # Wheel animation is still playing probably
+		WheelAnimation.stop()
+		Wheel.visible = false
+		Wheel.active = false
 	RocketAnimation.play("RocketLaunch")
 	var fx = get_node("SoundFX/RocketLaunch")
 	fx.play()
@@ -59,6 +67,7 @@ func land_rocket():
 	RocketAnimation.play("RocketLanding")
 	RocketStatus = "IsLanding"
 	get_node("SoundFX/RocketLanding").play()
+	get_node("RoundSummary").visible = false
 	RoundState = "BeginRound"
 	var balance = get_node("BalanceSheet")
 	balance.visible = true
@@ -68,14 +77,17 @@ func land_rocket():
 
 
 func _process(delta):
-	if Input.is_action_just_pressed("start") and RocketStatus == "InSpace":
+	var RoundSummary = get_node("RoundSummary")
+	if Input.is_action_just_pressed("start") and RoundSummary.visible:
+		if get_node("BalanceSheet").cash <= 0:
+			reset_balance()
+		RoundSummary.visible = false
 		land_rocket()
-	if Input.is_action_pressed("launch_rocket") and RocketStatus == "Landed":
+	elif Input.is_action_just_pressed("start") and RocketStatus == "InSpace":
+		land_rocket()
+	elif Input.is_action_pressed("launch_rocket") and RocketStatus == "Landed":
 		launch_rocket()
-	if Input.is_action_just_pressed("start") and RoundState == "RoundSummary":
-		get_node("RoundSummary").visible = false
-		land_rocket()
-	if Input.is_key_pressed(KEY_M):
+	elif Input.is_key_pressed(KEY_M):
 		var audio = get_node("Soundtrack/MainTheme")
 		if audio.is_playing():
 			if audio.get_playback_position() > 1:
@@ -177,9 +189,14 @@ func format_money(n):
 	return n_s
 
 
-func show_summary(profit, _cash):
+func show_summary(profit, cash):
 	get_node("RoundSummary").visible = true
-	if profit > 0:
+	if cash <= 0:
+		var s = format_money(profit)
+		get_node("RoundSummary/GameOver/Losses").set_text(s)
+		get_node("RoundSummary/AnimationPlayer").play("GameOver")
+		get_node("SoundFX/GameOver").play()
+	elif profit > 0:
 		var s = format_money(profit)
 		get_node("RoundSummary/Profit/Profits").set_text(s)
 		get_node("RoundSummary/AnimationPlayer").play("Profit")
@@ -202,7 +219,7 @@ func end_round():
 	var cash = balance.cash
 	var profit = revenue + cost # cost is negative
 	balance.reset(cash + profit)
-	show_summary(profit, cash)
+	show_summary(profit, cash + profit)
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):

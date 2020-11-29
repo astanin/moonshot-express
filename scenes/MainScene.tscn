@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://scenes/MainScene.gd" type="Script" id=1]
 [ext_resource path="res://assets/mainscene/background.png" type="Texture" id=2]
@@ -18,18 +18,19 @@
 [ext_resource path="res://assets/sound/landing2.ogg" type="AudioStream" id=16]
 [ext_resource path="res://assets/sound/Cha_Ching_Register-Muska666-173262285.wav" type="AudioStream" id=17]
 [ext_resource path="res://assets/sound/243020__plasterbrain__game-start.wav" type="AudioStream" id=18]
-[ext_resource path="res://assets/tip_move_and_place.png" type="Texture" id=19]
-[ext_resource path="res://assets/tip_move_and_place_gamepad.png" type="Texture" id=20]
-[ext_resource path="res://scenes/Wheel.tscn" type="PackedScene" id=21]
-[ext_resource path="res://assets/tip_selection.png" type="Texture" id=22]
-[ext_resource path="res://assets/tip_select_prev_next.png" type="Texture" id=23]
-[ext_resource path="res://assets/tip_select_mini.png" type="Texture" id=24]
-[ext_resource path="res://scenes/CountdownTimer.tscn" type="PackedScene" id=25]
-[ext_resource path="res://scenes/BalanceSheet.tscn" type="PackedScene" id=26]
-[ext_resource path="res://scenes/AnimationPlayer.gd" type="Script" id=27]
-[ext_resource path="res://assets/monogram.ttf" type="DynamicFontData" id=28]
-[ext_resource path="res://scenes/RoundSummary.tscn" type="PackedScene" id=29]
-[ext_resource path="res://assets/tip_start.png" type="Texture" id=30]
+[ext_resource path="res://assets/sound/371451__cabled-mess__lose-funny-retro-video-game.wav" type="AudioStream" id=19]
+[ext_resource path="res://assets/tip_move_and_place.png" type="Texture" id=20]
+[ext_resource path="res://assets/tip_move_and_place_gamepad.png" type="Texture" id=21]
+[ext_resource path="res://scenes/Wheel.tscn" type="PackedScene" id=22]
+[ext_resource path="res://assets/tip_selection.png" type="Texture" id=23]
+[ext_resource path="res://assets/tip_select_prev_next.png" type="Texture" id=24]
+[ext_resource path="res://assets/tip_select_mini.png" type="Texture" id=25]
+[ext_resource path="res://scenes/CountdownTimer.tscn" type="PackedScene" id=26]
+[ext_resource path="res://scenes/BalanceSheet.tscn" type="PackedScene" id=27]
+[ext_resource path="res://scenes/AnimationPlayer.gd" type="Script" id=28]
+[ext_resource path="res://assets/monogram.ttf" type="DynamicFontData" id=29]
+[ext_resource path="res://scenes/RoundSummary.tscn" type="PackedScene" id=30]
+[ext_resource path="res://assets/tip_start.png" type="Texture" id=31]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 295.56, 201.094 )
@@ -533,7 +534,7 @@ tracks/2/keys = {
 size = 36
 outline_size = 4
 outline_color = Color( 0.290196, 0.262745, 0.0627451, 1 )
-font_data = ExtResource( 28 )
+font_data = ExtResource( 29 )
 
 [sub_resource type="Animation" id=18]
 resource_name = "CashIn"
@@ -748,6 +749,9 @@ position = Vector2( 421.386, 138.538 )
 stream = ExtResource( 18 )
 volume_db = 10.0
 
+[node name="GameOver" type="AudioStreamPlayer" parent="SoundFX"]
+stream = ExtResource( 19 )
+
 [node name="tip_move_and_place" type="Sprite" parent="."]
 editor/display_folded = true
 visible = false
@@ -755,13 +759,13 @@ modulate = Color( 1, 1, 1, 0.752941 )
 position = Vector2( 1040.38, 853.889 )
 rotation = -2.32831e-010
 scale = Vector2( 1, 1 )
-texture = ExtResource( 19 )
+texture = ExtResource( 20 )
 
 [node name="tip_move_and_place_gamepad" type="Sprite" parent="tip_move_and_place"]
 position = Vector2( 4.89392, 144.235 )
-texture = ExtResource( 20 )
+texture = ExtResource( 21 )
 
-[node name="Wheel" parent="." instance=ExtResource( 21 )]
+[node name="Wheel" parent="." instance=ExtResource( 22 )]
 editor/display_folded = true
 visible = false
 position = Vector2( -633.069, 1719.06 )
@@ -775,28 +779,28 @@ position = Vector2( 0, -20 )
 modulate = Color( 1, 1, 1, 0.752941 )
 position = Vector2( 621.396, -376.203 )
 scale = Vector2( 0.684854, 0.842119 )
-texture = ExtResource( 22 )
+texture = ExtResource( 23 )
 
 [node name="tip_select_prev_next" type="Sprite" parent="Wheel/tips"]
 modulate = Color( 1, 1, 1, 0.752941 )
 position = Vector2( 208.166, -235.061 )
-texture = ExtResource( 23 )
+texture = ExtResource( 24 )
 
 [node name="tip_confirm_selection" type="Sprite" parent="Wheel/tips"]
 modulate = Color( 1, 1, 1, 0.752941 )
 position = Vector2( 299.078, -83.0804 )
-texture = ExtResource( 24 )
+texture = ExtResource( 25 )
 
 [node name="Things" type="Node2D" parent="."]
 position = Vector2( 158.846, 946.908 )
 rotation = -6.98492e-010
 
-[node name="CountdownTimer" parent="." instance=ExtResource( 25 )]
+[node name="CountdownTimer" parent="." instance=ExtResource( 26 )]
 visible = false
 position = Vector2( 1915.24, 171.822 )
 rotation = -2.32831e-010
 
-[node name="BalanceSheet" parent="." instance=ExtResource( 26 )]
+[node name="BalanceSheet" parent="." instance=ExtResource( 27 )]
 visible = false
 rotation = -0.00296486
 scale = Vector2( 1, 1 )
@@ -805,13 +809,13 @@ scale = Vector2( 1, 1 )
 root_node = NodePath("../Rocket")
 anims/RocketLanding = SubResource( 9 )
 anims/RocketLaunch = SubResource( 10 )
-script = ExtResource( 27 )
+script = ExtResource( 28 )
 
 [node name="WheelAnimation" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Rocket")
 anims/HideWheel = SubResource( 11 )
 anims/ShowWheel = SubResource( 12 )
-script = ExtResource( 27 )
+script = ExtResource( 28 )
 
 [node name="PaymentFX" type="Node2D" parent="."]
 
@@ -829,7 +833,7 @@ text = "$123,456"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PaymentFX/Label"]
 anims/CashIn = SubResource( 18 )
 
-[node name="RoundSummary" parent="." instance=ExtResource( 29 )]
+[node name="RoundSummary" parent="." instance=ExtResource( 30 )]
 visible = false
 margin_left = 966.747
 margin_top = 331.049
@@ -841,6 +845,6 @@ visible = false
 modulate = Color( 1, 1, 1, 0.752941 )
 position = Vector2( 1018.91, 985.062 )
 rotation = 0.0349066
-texture = ExtResource( 30 )
+texture = ExtResource( 31 )
 [connection signal="animation_finished" from="RocketAnimation" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_finished" from="WheelAnimation" to="." method="_on_AnimationPlayer_animation_finished"]
