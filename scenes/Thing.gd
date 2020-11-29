@@ -6,7 +6,7 @@ export var active = false
 export var deliverycost = 0
 export var basecost = 220_000_000
 export var basesize = 200*200.0
-export var costexponent = 1.05
+export var costexponent = 1.02
 
 
 var direction = Vector2(1, 0)
@@ -43,9 +43,9 @@ func choose_price(Item):
 	# price proportional to its size and complexity
 	var extent= calc_extent(VisibleItem)
 	var size : float = extent[0]*extent[1]
-	#var p : float = VisibleItem.get_polygon().size() / 6.0
 	var targetprice = pow(size/basesize, costexponent) * basecost
-	var randomprice = round(rand_range(0.9*targetprice, 1.1*targetprice))
+	var randomprice = round(rand_range(0.8*targetprice, 1.2*targetprice))
+	deliverycost = randomprice
 	return randomprice
 
 	
@@ -89,7 +89,7 @@ func choose_random_type():
 	#print("total items: ", Items.size(), ", random idx=", idx, ", selected=",VisibleItem.name)
 	VisibleItem.disabled = false
 	VisibleItem.visible = true
-	deliverycost = choose_price(VisibleItem)
+	choose_price(VisibleItem)
 	update_show_price()
 	return VisibleItem.name
 
