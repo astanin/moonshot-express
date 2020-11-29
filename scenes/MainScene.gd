@@ -41,16 +41,17 @@ func cleanup_container(container):
 
 
 func launch_rocket():
+	RocketStatus = "IsLaunching"
 	if WheelVisible:
 		WheelAnimation.play("HideWheel")
 	RocketAnimation.play("RocketLaunch")
-	RocketStatus = "IsLaunching"
 	var fx = get_node("SoundFX/RocketLaunch")
 	fx.play()
 	cleanup_container(Things) # TODO add a nice animation
 	get_node("tip_move_and_place").hide()
 	var countdown = get_node("CountdownTimer")
 	countdown.hide()
+	get_node("Soundtrack/MainTheme").stop()
 
 
 func land_rocket():
@@ -69,12 +70,8 @@ func _process(delta):
 	if Input.is_action_just_pressed("start"):
 		if RocketStatus == "InSpace":
 			land_rocket()
-	# DEBUG ONLY:
-	#if Input.is_key_pressed(KEY_SPACE): # TODO replace with timer
-	#	if RocketStatus == "Landed":
-	#		launch_rocket()
-	#	elif RocketStatus == "InSpace":
-	#		land_rocket()
+	if Input.is_action_pressed("launch_rocket") and RocketStatus == "Landed":
+		launch_rocket()
 	if Input.is_key_pressed(KEY_M):
 		var audio = get_node("Soundtrack/MainTheme")
 		if audio.is_playing():
@@ -176,7 +173,6 @@ func end_round():
 		get_node("SoundFX/Profit").play()
 	else:
 		get_node("SoundFX/Loss").play()
-	get_node("Soundtrack/MainTheme/Transitions").play("FadeOut")
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):
