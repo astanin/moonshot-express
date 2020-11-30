@@ -770,7 +770,6 @@ position = Vector2( 732.635, -493.612 )
 texture = ExtResource( 22 )
 
 [node name="Wheel" parent="." instance=ExtResource( 23 )]
-editor/display_folded = true
 visible = false
 position = Vector2( -633.069, 1719.06 )
 
@@ -792,7 +791,7 @@ texture = ExtResource( 25 )
 
 [node name="tip_confirm_selection" type="Sprite" parent="Wheel/tips"]
 modulate = Color( 1, 1, 1, 0.752941 )
-position = Vector2( 299.078, -83.0804 )
+position = Vector2( 221.59, -82.8507 )
 texture = ExtResource( 26 )
 
 [node name="Things" type="Node2D" parent="."]
