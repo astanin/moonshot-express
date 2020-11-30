@@ -8,6 +8,7 @@ onready var RocketInside = Rocket.get_node("Inside").get_node("Container")
 onready var Wheel = get_node("Wheel")
 onready var RocketAnimation = get_node("RocketAnimation")
 onready var WheelAnimation = get_node("WheelAnimation")
+onready var GameMenu = get_node("GameMenu")
 
 
 onready var LastThing = null
@@ -76,6 +77,7 @@ func land_rocket():
 		get_node("SoundFX/Profit").play()
 		FirstRound = false
 
+	
 
 func _process(delta):
 	var RoundSummary = get_node("RoundSummary")
@@ -88,7 +90,11 @@ func _process(delta):
 		land_rocket()
 	elif Input.is_action_pressed("launch_rocket") and RocketStatus == "Landed":
 		launch_rocket()
-	elif Input.is_key_pressed(KEY_M):
+	elif Input.is_action_just_released("game_menu"):
+		if GameMenu:
+			GameMenu.show()
+			get_tree().paused = true
+	elif Input.is_action_just_released("mute_sound"):
 		var audio = get_node("Soundtrack/MainTheme")
 		if audio.is_playing():
 			if audio.get_playback_position() > 1:
@@ -255,3 +261,19 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		WheelVisible = false
 		Wheel.active = false
 		Wheel.visible = false
+
+
+
+
+func _on_GameMenu_exit_game():
+	get_tree().quit()
+
+
+func _on_GameMenu_resume_game():
+	get_tree().paused = false
+	GameMenu.hide()
+
+
+func _on_GameMenu_show_credits():
+	get_tree().paused = false
+	GameMenu.hide()

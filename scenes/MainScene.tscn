@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://scenes/MainScene.gd" type="Script" id=1]
 [ext_resource path="res://assets/mainscene/background.png" type="Texture" id=2]
@@ -32,6 +32,7 @@
 [ext_resource path="res://assets/monogram.ttf" type="DynamicFontData" id=30]
 [ext_resource path="res://scenes/RoundSummary.tscn" type="PackedScene" id=31]
 [ext_resource path="res://assets/tip_start.png" type="Texture" id=32]
+[ext_resource path="res://scenes/GameMenu.tscn" type="PackedScene" id=33]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 295.56, 201.094 )
@@ -847,5 +848,15 @@ modulate = Color( 1, 1, 1, 0.752941 )
 position = Vector2( 1018.91, 985.062 )
 rotation = 0.0349066
 texture = ExtResource( 32 )
+
+[node name="GameMenu" parent="." instance=ExtResource( 33 )]
+visible = false
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 1920.0
+margin_bottom = 1080.0
 [connection signal="animation_finished" from="RocketAnimation" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_finished" from="WheelAnimation" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="exit_game" from="GameMenu" to="." method="_on_GameMenu_exit_game"]
+[connection signal="resume_game" from="GameMenu" to="." method="_on_GameMenu_resume_game"]
+[connection signal="show_credits" from="GameMenu" to="." method="_on_GameMenu_show_credits"]
