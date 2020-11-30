@@ -9,6 +9,7 @@ onready var Wheel = get_node("Wheel")
 onready var RocketAnimation = get_node("RocketAnimation")
 onready var WheelAnimation = get_node("WheelAnimation")
 onready var GameMenu = get_node("GameMenu")
+onready var CreditsPage = get_node("CreditsPage")
 
 
 onready var LastThing = null
@@ -270,10 +271,18 @@ func _on_GameMenu_exit_game():
 
 
 func _on_GameMenu_resume_game():
-	get_tree().paused = false
 	GameMenu.hide()
+	get_tree().paused = false
 
 
 func _on_GameMenu_show_credits():
-	get_tree().paused = false
 	GameMenu.hide()
+	if CreditsPage:
+		CreditsPage.show()
+	else:
+		get_tree().paused = false
+
+
+func _on_CreditsPage_close_credits():
+	CreditsPage.hide()
+	GameMenu.show()

@@ -20,12 +20,14 @@ func _process(delta):
 		return
 
 	var focus = get_focus_owner()
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_released("ui_accept"):
 		var name = focus.name
 		if name == "ExitButton":
 			emit_signal("exit_game")
 		elif name == "ResumeButton":
 			emit_signal("resume_game")
+		elif name == "CreditsButton":
+			emit_signal("show_credits")
 	elif Input.is_action_just_released("game_menu") and menu_pressed:
 		emit_signal("resume_game")
 	elif Input.is_action_just_pressed("game_menu"):
