@@ -2,7 +2,7 @@ Moonshot Express
 ================
 
 _This mini game is a submission for [Game Off
-2020][https://itch.io/jam/game-off-2020] game jam._
+2020](https://itch.io/jam/game-off-2020) game jam._
 
 Moonshot Express is the first private space delivery company. Its
 reusable rockets fly to to the Moon every 60 seconds. But even reusable
