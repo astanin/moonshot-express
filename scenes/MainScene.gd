@@ -89,7 +89,7 @@ func _process(delta):
 		land_rocket()
 	elif Input.is_action_just_pressed("start") and RocketStatus == "InSpace":
 		land_rocket()
-	elif Input.is_action_pressed("launch_rocket") and RocketStatus == "Landed":
+	elif Input.is_action_pressed("launch_rocket") and RocketStatus == "Landed" and !Wheel.visible:
 		launch_rocket()
 	elif Input.is_action_just_released("game_menu"):
 		if GameMenu:
